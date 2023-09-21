@@ -13,7 +13,7 @@
 if( ! defined( 'ABSPATH' ) ) die; // Die if accessed directly
 
 global $wpdb;
-global $onFeedMain;
+global $onfmain;
 define( 'ONFEED_V', '2.2.7' ); // Version
 
 // Db version.
@@ -60,6 +60,7 @@ use Oppimittinetworking\OnfeedFacebook\Action\ONFActivate;
 use Oppimittinetworking\OnfeedFacebook\Action\ONFDeactivate;
 use Oppimittinetworking\OnfeedFacebook\RSA\ONFRSADecrypt;
 use Oppimittinetworking\OnfeedFacebook\RSA\ONFRSAEncrypt;
+use phpseclib3\Crypt\RSA;
 
 
 // require_once ONFEED_PLUGIN_PATH . '/inc/onfeed-activate.php';
@@ -99,7 +100,7 @@ class OnFeedMain {
         ONFDeactivate::unregister_wp_scripts();
     }
 
-    public static function encrypt_conn() {
+    public function encrypt_conn() {
         return new ONFRSAEncrypt();
     }
 
@@ -110,13 +111,13 @@ class OnFeedMain {
 }
 
 if ( class_exists( 'OnFeedMain' ) )
-    $onFeedMain = new OnFeedMain();
+    $onfmain = new OnFeedMain();
 
 // activaion hook
-register_activation_hook( __FILE__, array( $onFeedMain, '__construct' ) );
+register_activation_hook( __FILE__, array( $onfmain, '__construct' ) );
 
 // deactivation hook
-register_deactivation_hook( __FILE__, array( $onFeedMain, '__deactivate' ) );
+register_deactivation_hook( __FILE__, array( $onfmain, '__deactivate' ) );
 
 // function onfeed_plugin_top_menu() {
 //     add_menu_page( ONFEED_PLUGIN_BASENAME, ONFEED_PLUGIN_BASENAME, 'manage_options',  ONFEED_SLUG, 'onfeed_main_page' );
@@ -137,4 +138,3 @@ function onfeed_main_page() {
 // function see_prova2() {
 //     echo 'Prova2';
 // }
- ?> r

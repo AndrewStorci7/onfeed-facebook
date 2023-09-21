@@ -68,12 +68,15 @@ class ONFActivate {
                 id_onfeed_posts varchar(255) NOT NULL DEFAULT '-1',
                 id_onfeed_events varchar(255) NOT NULL DEFAULT '-1',
                 id_onfeed_album_photo varchar(255) NOT NULL DEFAULT '-1',
-                token_onfeed varchar(255) NOT NULL,
+                pub_key text NOT NULL,
+                priv_key text NOT NULL,
                 token_fb varchar(255) NOT NULL
             ) $charset_collate;
             ALTER TABLE $table_name_feeds ADD FOREIGN KEY (id_onfeed_posts) REFERENCES $table_name_posts (id);
             ALTER TABLE $table_name_feeds ADD FOREIGN KEY (id_onfeed_events) REFERENCES $table_name_events (id);
             ALTER TABLE $table_name_feeds ADD FOREIGN KEY (id_onfeed_album_photo) REFERENCES $table_name_album_photo (id);
+            ALTER TABLE $table_name_feeds ADD UNIQUE (pub_key);
+            ALTER TABLE $table_name_feeds ADD UNIQUE (priv_key);
             ";
 
             require_once ABSPATH . 'wp-admin/includes/upgrade.php';

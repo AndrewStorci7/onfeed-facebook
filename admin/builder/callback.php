@@ -6,18 +6,19 @@
  * @since 2.2.0 
 */
 
-require_once __DIR__ . '/../../src/RSA/ONFRSAEncrypt';
-
-use Oppimittinetworking\OnfeedFacebook\RSA\ONFRSAEncrypt;
-
 $hs = isset( $_POST[ 'hs' ] ) ? $_POST[ 'hs' ] : false;
 $pk = isset( $_POST[ 'pk' ] ) ? $_POST[ 'pk' ] : false;
 
 if ( $hs && $pk ) {
+    // First step: generation of keys
+    global $onfmain;
 
-    // ONLY FOR TEST
-    $rsa = new ONFRSAEncrypt();
-    echo $rsa->getPublicKey();
+    $enc_conn = $onfmain->encrypt_conn();
+
+    // Second step: get the domain/URI to associate with the public key
+
+    // Third step: send the public key to the OAuth API and save it
+
 
     $url = 'https://oauthon.local/oauth/onfeed/handshake.php';
     // $url = 'https://oppimittinetworking.com/oauth/onfeed/handshake.php';

@@ -7,8 +7,7 @@
 */
 
 namespace Oppimittinetworking\OnfeedFacebook\RSA;
-
-// if ( ! defined( 'ABSPATH' ) ) exit;
+use phpseclib3\Crypt\RSA;
 
 class ONFRSAEncrypt {
     
@@ -50,7 +49,7 @@ class ONFRSAEncrypt {
      * Constructor
      */
     public function __construct() {
-
+        
         $this->openssl_cnf = [
             'config'            => plugins_url( '/openssl/openssl.cnf', __FILE__ ),
             'default_md'        => 'sha512',
