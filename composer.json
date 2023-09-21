@@ -1,0 +1,30 @@
+{
+    "name": "oppimittinetworking/onfeed-facebook",
+    "description": "Display the Facebook's posts into your website, and customize it",
+    "type": "project",
+    "license": "GPL",
+    "autoload": {
+        "psr-4": {
+            "Oppimittinetworking\\OnfeedFacebook\\": "src/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true
+    },
+    "authors": [
+        {
+            "name": "Andrea Storci",
+            "email": "astorci.andrea@gmail.com",
+            "homepage": "https://www.andreastorci.it",
+            "role": "Developer"
+        },
+        {
+            "name": "Oppimittinetworking",
+            "email": "laboratorio@oppimittinetworking.com",
+            "homepage": "https://www.oppimittinetworking.com",
+            "role": "Company"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}

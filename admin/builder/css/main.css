@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;500&display=swap');
+
+.onfeed-hr {
+    width: 80% !important;
+    margin-left: 5% !important;
+}
+#wpbody {
+    margin-right: 20px !important;
+}
+.onfeed-header-pannel,
+.onfeed-main-pannel {
+    font-family: 'Montserrat', sans-serif;
+}
+.onfeed-header-pannel {
+    border-radius: 20px 20px 0 0;
+    padding: 0px !important;
+    height: auto;
+    background-color: #333333;
+    /* margin-right: 20px !important; */
+    margin-top: 30px;
+    position : relative;
+}
+.onfeed-main-pannel {
+    margin-top: -14px;
+    border-radius: 20px 20px 10px 10px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    min-height: 400px;
+    background-color: #EBEBEB;
+    /* margin-right: 20px !important; */
+    position : relative;
+}
+.onfeed-content{
+    padding: 0px !important;
+    /* position: absolute;
+    top: 50%;
+    left: 50%; */
+}
+.onfeed-img {
+    width: 100%;
+    border-radius: 20px 20px 0 0;
+}
+.onfeed-new-feed h2,
+.onfeed-exis-feed h2 {
+    font-weight: 500;
+    padding-left: 95px;
+    padding-top: 25px;
+}
+.onfeed-new-feed p,
+.onfeed-exis-feed p {
+    font-size: 15px;
+    padding-left: 95px;
+}
+.onfeed-copyright-on {
+    padding-top: 5px;
+    font-size: 10px;
+    color: #ABABAB;
+}
+.onfeed-copyright-on a {
+    text-decoration: none;
+    font-weight: 500;
+    color: #999999;
+}
+.onfeed-copyright-on a:hover {
+    background-color: #C9EDDC;
+    color: #ABABAB;
+}
+.onfeed-copyright-on a:visited {
+    color: #C9EDDC;
+}
+.onfeed-new-feed .fa-solid {
+    transform: rotate(0deg);
+    transition: transform .5s ease-out;
+}
+.onfeed-new-feed .fa-solid:hover {
+    transform: rotate(360deg);
+    transition: transform .5s ease-out;
+}
+#onfeed-show-feeds {
+    position: relative;
+    padding-top: 20px;
+    padding-left: 0px !important;
+    font-size: 20px !important;
+    text-align: center;
+}
+.onfeed-loading-page-connection .container {
+    position: absolute;
+    z-index: 999;
+    top: 30%;
+    left: 30%;
+    background-color: #333333;
+    border-radius: 10px;
+    width: 500px;
+    height: 300px;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}

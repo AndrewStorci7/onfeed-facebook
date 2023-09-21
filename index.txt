@@ -1,0 +1,10 @@
+<?php
+/**
+ * OnFeedActivate class
+ * Activation plugin class
+ * 
+ * @package onfeed-facebook
+ * @author Andrea Storci
+ * 
+ * @since 2.2.7
+ */
