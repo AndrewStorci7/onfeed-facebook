@@ -17,6 +17,11 @@
             <button id="onfeed-btn-sendtoapi" type="button" class="btn btn-info">
                 Connect
             </button>
+            <!--<form action="../../src/RSA/ONFRSAEncrypt.php" method="post">
+                <button id="onfeed-btn-sendtoapi" type="button" class="btn btn-info">
+                    Connect
+                </button>
+            </form>-->
             <p id="prova-hs">
                 <?php //if ( $data_from_fb !== null || $data_from_fb !== "" ) { 
                     //echo $data_from_fb;

@@ -5,11 +5,15 @@
  * Class that contain the props and attrs of the Feeds' personal account
  * 
  * @since 2.2.7
- */ 
+*/ 
 
-namespace OnFeed;
+namespace Oppimittinetworking\OnfeedFacebook\View;
 
-class ONF_Feed_Profile {
+class ONFeedGroup {
+    /**
+     * @var string
+     */
+    protected $type;
     
     /**
      * @var array|json
@@ -31,11 +35,12 @@ class ONF_Feed_Profile {
      */ 
     protected $active;
     
-    public function __construct( $a, $b, $c, $d ) {
+    public function __construct( $a, $b, $c, $d, $e ) {
         $this->attrs    = $a;
         $this->props    = $b;
         $this->options  = $c;
-        $this->active   = $a;
+        $this->active   = $d;
+        $this->type     = $e;
     }
     
     /**

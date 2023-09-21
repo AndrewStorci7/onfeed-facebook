@@ -14,6 +14,7 @@ if( ! defined( 'ABSPATH' ) ) die; // Die if accessed directly
 
 global $wpdb;
 global $onfmain;
+
 define( 'ONFEED_V', '2.2.7' ); // Version
 
 // Db version.
@@ -56,59 +57,11 @@ if ( ! defined( 'ONFEED_DB_TABLE' ) ) {
 }
 
 require_once ONFEED_PLUGIN_PATH . '/vendor/autoload.php';
+use Oppimittinetworking\OnfeedFacebook\OnFeedMain;
 use Oppimittinetworking\OnfeedFacebook\Action\ONFActivate;
 use Oppimittinetworking\OnfeedFacebook\Action\ONFDeactivate;
 use Oppimittinetworking\OnfeedFacebook\RSA\ONFRSADecrypt;
 use Oppimittinetworking\OnfeedFacebook\RSA\ONFRSAEncrypt;
-use phpseclib3\Crypt\RSA;
-
-
-// require_once ONFEED_PLUGIN_PATH . '/inc/onfeed-activate.php';
-// require_once ONFEED_PLUGIN_PATH . '/inc/onfeed-deactivate.php';
-// require_once ONFEED_BUILDER_PATH . 'class/onfeed-classes.php';
-
-/**
- * Main Class for OnFeedFacebook Plugin
- * 
- * @author Andrea Storci
- * 
- * @since 2.2.7
- */
-
-class OnFeedMain {
-
-    /**
-     * Constructor:
-     * It will call the functions that register admin and gloabal's scripts, 
-     * add ... , 
-     * and create the tables plugin needs inside the database. 
-     * 
-     * no @param
-     * no @return
-     * 
-     * @since 2.2.7
-     */
-    public function __construct() {
-        ONFActivate::activate();
-        ONFActivate::register_admin_scripts();
-        ONFActivate::register_wp_scripts();
-    }
-
-    public function __deactivate() {
-        ONFDeactivate::deactivate();
-        ONFDeactivate::unregister_admin_scripts();
-        ONFDeactivate::unregister_wp_scripts();
-    }
-
-    public function encrypt_conn() {
-        return new ONFRSAEncrypt();
-    }
-
-    public function decrypt_data() {
-        return new ONFRSADecrypt();
-    }
-
-}
 
 if ( class_exists( 'OnFeedMain' ) )
     $onfmain = new OnFeedMain();
@@ -127,7 +80,7 @@ register_deactivation_hook( __FILE__, array( $onfmain, '__deactivate' ) );
 // add_action( 'admin_menu', 'onfeed_plugin_top_menu' );
 
 function onfeed_main_page() {
-    include_once ONFEED_BUILDER_PATH . 'index.php';
+    include_once ONFEED_BUILDER_PATH . 'main-page.php';
     // include_once ONFEED_BUILDER_PATH . 'class/onfeed-classes.php';
 }
 
@@ -138,3 +91,4 @@ function onfeed_main_page() {
 // function see_prova2() {
 //     echo 'Prova2';
 // }
+ ?>

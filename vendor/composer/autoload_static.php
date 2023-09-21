@@ -36,16 +36,22 @@ class ComposerStaticInitf0d99b21904ee15abb175e96675ed52b
         ),
         'Oppimittinetworking\\OnfeedFacebook\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/src',
+            0 => __DIR__ . '/../..' . '/admin/builder',
         ),
     );
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'Oppimittinetworking\\OnfeedFacebook\\Action\\ONFActivate' => __DIR__ . '/../..' . '/src/Action/ONFActivate.php',
-        'Oppimittinetworking\\OnfeedFacebook\\Action\\ONFDeactivate' => __DIR__ . '/../..' . '/src/Action/ONFDeactivate.php',
-        'Oppimittinetworking\\OnfeedFacebook\\RSA\\ONFRSADecrypt' => __DIR__ . '/../..' . '/src/RSA/ONFRSADecrypt.php',
-        'Oppimittinetworking\\OnfeedFacebook\\RSA\\ONFRSAEncrypt' => __DIR__ . '/../..' . '/src/RSA/ONFRSAEncrypt.php',
+        'Oppimittinetworking\\OnfeedFacebook\\Action\\ONFActivate' => __DIR__ . '/../..' . '/admin/builder/Action/ONFActivate.php',
+        'Oppimittinetworking\\OnfeedFacebook\\Action\\ONFDeactivate' => __DIR__ . '/../..' . '/admin/builder/Action/ONFDeactivate.php',
+        'Oppimittinetworking\\OnfeedFacebook\\OnFeedMain' => __DIR__ . '/../..' . '/admin/builder/OnFeedMain.php',
+        'Oppimittinetworking\\OnfeedFacebook\\RSA\\ONFRSADecrypt' => __DIR__ . '/../..' . '/admin/builder/RSA/ONFRSADecrypt.php',
+        'Oppimittinetworking\\OnfeedFacebook\\RSA\\ONFRSAEncrypt' => __DIR__ . '/../..' . '/admin/builder/RSA/ONFRSAEncrypt.php',
+        'Oppimittinetworking\\OnfeedFacebook\\View\\ONFBSettings' => __DIR__ . '/../..' . '/admin/builder/View/ONFBSettings.php',
+        'Oppimittinetworking\\OnfeedFacebook\\View\\ONFDo' => __DIR__ . '/../..' . '/admin/builder/View/ONFDo.php',
+        'Oppimittinetworking\\OnfeedFacebook\\View\\ONFeedGroup' => __DIR__ . '/../..' . '/admin/builder/View/ONFeedGroup.php',
+        'Oppimittinetworking\\OnfeedFacebook\\View\\ONFeedPage' => __DIR__ . '/../..' . '/admin/builder/View/ONFeedPage.php',
+        'Oppimittinetworking\\OnfeedFacebook\\View\\ONFeedProfile' => __DIR__ . '/../..' . '/admin/builder/View/ONFeedProfile.php',
         'ParagonIE\\ConstantTime\\Base32' => __DIR__ . '/..' . '/paragonie/constant_time_encoding/src/Base32.php',
         'ParagonIE\\ConstantTime\\Base32Hex' => __DIR__ . '/..' . '/paragonie/constant_time_encoding/src/Base32Hex.php',
         'ParagonIE\\ConstantTime\\Base64' => __DIR__ . '/..' . '/paragonie/constant_time_encoding/src/Base64.php',
