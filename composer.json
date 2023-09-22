@@ -5,7 +5,8 @@
     "license": "GPL",
     "autoload": {
         "psr-4": {
-            "Oppimittinetworking\\OnfeedFacebook\\": "admin/builder/"
+            "Oppimittinetworking\\OnfeedFacebook\\": "admin/builder/",
+            "Oppimittinetworking\\": "admin/"
         }
     },
     "config": {

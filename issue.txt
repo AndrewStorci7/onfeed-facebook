@@ -1,0 +1,193 @@
+Hi everyone, I'm currently developing a **WordPress plugin**.
+The main class I have created activates and deactivates all necessary functions, settings and files for the plugin and I use **composer** to manage the inclusion of classes.
+
+Yesterday I changed the main `psr-4` folder from `src/` to `admin/builder/` and this caused problems.   
+Now the hierarchy of the project is like this:  
+```
+onfeed-facebook\
+|---admin\
+    |---builder
+        |---Action\
+        |---RSA\
+        |---View\
+        |---OnFeedMain.php
+|---vendor\
+|---assets\
+|---onfeed.php
+|---...
+```
+I should point out that after editing the `composer.json` file I also ran the `composer dump-autoload` command... but I still get this error:
+
+```
+Fatal error: Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, first array member is not a valid class name or object in C:\www\clientwp.local\wp-includes\class-wp-hook.php:310 
+Stack trace: 
+#0 C:\www\clientwp.local\wp-includes\class-wp-hook.php(334): WP_Hook->apply_filters('', Array) 
+#1 C:\www\clientwp.local\wp-includes\plugin.php(517): WP_Hook->do_action(Array) 
+#2 C:\www\clientwp.local\wp-admin\includes\plugin.php(816): do_action('deactivate_onfe...', false) 
+#3 C:\www\clientwp.local\wp-admin\plugins.php(209): deactivate_plugins('onfeed-facebook...', false, false) 
+#4 {main} thrown in C:\www\clientwp.local\wp-includes\class-wp-hook.php on line 310
+```
+
+Here's the `composer.json` file:
+
+```
+    "autoload": {
+        "psr-4": {
+            "Oppimittinetworking\\OnfeedFacebook\\": "admin/builder/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true
+    }
+```
+
+This is the `OnFeedMain.php` Class:
+
+```
+namespace Oppimittinetworking\OnfeedFacebook;
+use Oppimittinetworking\OnfeedFacebook\Action\ONFActivate;
+use Oppimittinetworking\OnfeedFacebook\Action\ONFDeactivate;
+use Oppimittinetworking\OnfeedFacebook\RSA\ONFRSAEncrypt;
+use Oppimittinetworking\OnfeedFacebook\RSA\ONFRSADecrypt;
+
+class OnFeedMain {
+
+    public function __construct() {
+        ONFActivate::activate();
+        ONFActivate::register_admin_scripts();
+        ONFActivate::register_wp_scripts();
+    }
+
+    public function __deactivate() {
+        ONFDeactivate::deactivate();
+        ONFDeactivate::unregister_admin_scripts();
+        ONFDeactivate::unregister_wp_scripts();
+    }
+
+    public static function encrypt_conn() { return new ONFRSAEncrypt(); }
+    public function decrypt_data() { return new ONFRSADecrypt(); }
+}
+```
+
+Here's the `onfeed.php` file:
+
+```
+require_once ONFEED_PLUGIN_PATH . '/vendor/autoload.php';
+use Oppimittinetworking\OnfeedFacebook\OnFeedMain;
+
+if ( class_exists( 'OnFeedMain' ) )
+    $onfmain = new OnFeedMain();
+
+// activaion hook
+register_activation_hook( __FILE__, array( $onfmain, '__construct' ) );
+
+// deactivation hook
+register_deactivation_hook( __FILE__, array( $onfmain, '__deactivate' ) );
+```
+
+Here's the functions inside `ONFActivate.php` and `ONFDeactivate.php` classes: \
+`ONFActivate.php`:
+
+```
+namespace Oppimittinetworking\OnfeedFacebook\Action;
+
+class ONFActivate {
+
+    public static function activate() {
+        // No relevant code ...
+    }
+
+    public static function register_admin_scripts() {
+        add_action( 'admin_enqueue_scripts', array( 'Oppimittinetworking\OnfeedFacebook\Action\ONFActivate', "enqueue_admin" ) );
+
+        add_action( 'admin_menu', array( "Oppimittinetworking\OnfeedFacebook\Action\ONFActivate", 'add_admin_pages' ) );
+    }
+
+    public static function add_admin_pages() {
+        add_menu_page( 'OnFeed Facebook', 'OnFeed Facebook', 'manage_options', 'onfeed_admin_menu', array( 'Oppimittinetworking\OnfeedFacebook\Action\ONFActivate', 'admin_index' ), 'dashicons-facebook-alt', 110 );
+    }
+
+    public static function admin_index() {
+        require_once plugin_dir_path( __FILE__ ) . '../../admin/builder/index.php';
+    }
+
+    public static function register_wp_scripts() {
+        // TODO
+    }
+
+    public static function enqueue_admin() {
+        // Enqueue admin css files
+        // Bootstrap@5.3.0
+        wp_register_style( "bootstrap", "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" );
+        wp_enqueue_style( "bootstrap" );
+
+        // FontAwesome@6.4.0
+        wp_register_style( "font_awesome", "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" );
+        wp_enqueue_style( "font_awesome" );
+
+        wp_enqueue_style( "onfeed_main_css", plugins_url( "../../assets/css/main.css", __FILE__ ) );
+        wp_enqueue_style( "onfeed_shortcut_css", plugins_url( "../../assets/css/shortcut.css", __FILE__ ) );
+        wp_enqueue_style( "onfeed_feedspage_css", plugins_url( "../../assets/css/feedspage.css", __FILE__ ) );
+        
+        // Enqueue admin js files
+        // jQuery@3.6.3
+        wp_enqueue_script( "jquery_3_7_1-min", plugins_url( "../../assets/js/jquery-3.7.1.min.js", __FILE__ ), null, '3.7.1', array( 'strategy' => 'async' ) );
+
+        wp_enqueue_script( "onfeed_function_js", plugins_url( "../../assets/js/function.js", __FILE__ ), null, '2.2.0', array( 'strategy' => 'defer' ) );
+        wp_enqueue_script( "onfeed_handshake_js", plugins_url( "../../assets/js/handshake.js", __FILE__ ), null, '2.2.0', array( 'strategy' => 'defer' ) );
+        wp_enqueue_script( "onfeed_shortcut_js", plugins_url( "../../assets/js/shortcut.js", __FILE__ ), null, '2.2.0', array( 'strategy' => 'defer' ) );
+        wp_enqueue_script( "onfeed_feedspage_js", plugins_url( "../../assets/js/feedspage.js", __FILE__ ), null, '2.2.0', array( 'strategy' => 'defer' ) );
+    }
+
+    public static function enqueue_wp() {
+        // TODO
+    }
+}
+```
+
+`ONFDeactivate.php`:
+
+```
+namespace Oppimittinetworking\OnfeedFacebook\Action;
+
+class ONFDeactivate {
+
+    public static function deactivate() {
+        // Not relevant code ...
+    }
+
+    public function unregister_admin_scripts() {
+        add_action( 'admin_dequeue_scripts', array( 'Oppimittinetworking\OnfeedFacebook\Action\ONFDeactivate', "dequeue_admin" ) );
+    }
+
+    public static function unregister_wp_scripts() {
+        // TODO
+    }
+
+    public static function dequeue_admin() {
+        // Enqueue admin css files
+        wp_dequeue_style( "onfeed_main_css" );
+        wp_dequeue_style( "onfeed_shortcut_css" );
+        wp_dequeue_style( "onfeed_feedspage_css" );
+
+        // Enqueue admin js files
+        wp_dequeue_script( "onfeed_main_js" );
+        wp_dequeue_script( "onfeed_shortcut_js" );
+        wp_dequeue_script( "onfeed_feedspage_js" );
+    }
+
+    public static function dequeue_wp() {
+        // TODO
+    }
+}
+```
+
+I would also let you all know thta I've checked if the problem was caused by the uncorrect namespace, but how you can see there's no problem with that.
+
+I've also checked this link:
+
+- <https://stackoverflow.com/questions/68788729/uncaught-typeerror-call-user-func-array-argument-1-function-must-be-a-va>
+
+but the problem still.
+
+Thanks in advance for your reply.

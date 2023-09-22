@@ -6,7 +6,8 @@
  * @since 2.2.0 
 */
 
-require_once __DIR__ . '\..\..\onfeed.php';
+require_once __DIR__ . '/../onfeed.php';
+
 // First step: generation of keys
 global $onfmain;
 

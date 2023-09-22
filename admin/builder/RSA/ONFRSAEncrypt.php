@@ -55,44 +55,28 @@ class ONFRSAEncrypt {
      */
     public function __construct() {
 
-        // if ( isset( $_POST[ 'onfeed-connect' ] ) ) {
+        $this->privatekey       = RSA::createKey();
+        $this->publickey        = $this->privatekey->getPublicKey();
+        $this->current_domain   = $_SERVER[ 'SERVER_NAME' ];
+
+        $data = [ 
+            'pbk'       => $this->getPublicKey(), 
+            'domain'    => $this->current_domain
+        ];
+
+        $options = [
+            'http' => [
+                'header'    => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method'    => 'POST',
+                'content'   => http_build_query( $data )
+            ],
+        ];
             
-            // echo 'ciao';
-            $this->privatekey       = RSA::createKey();
-            $this->publickey        = $this->privatekey->getPublicKey();
-            $this->current_domain   = $_SERVER[ 'SERVER_NAME' ];
-
-            $data = [ 'pbk' => $rsa->getPublicKey() ];
-
-            $options = [
-                'http' => [
-                    'header'    => "Content-type: application/x-www-form-urlencoded\r\n",
-                    'method'    => 'POST',
-                    'content'   => http_build_query( $data )
-                ],
-            ];
-            
-            $context    = stream_context_create( $options );
-            $result     = file_get_contents( $url, false, $context );
-            if ( $result === false )
-                echo 'Error: Handshake with Oppimittinetworking.com Failed!';
-            else var_dump( $result );
-
-        // }
-
-        // $this->openssl_cnf = [
-        //     'config'            => plugins_url( '/openssl/openssl.cnf', __FILE__ ),
-        //     'default_md'        => 'sha512',
-        //     'private_key_bits'  => 1024,
-        //     'private_key_type'  => OPENSSL_KEYTYPE_RSA
-        // ];
-
-        // $this->keypair      = openssl_pkey_new( $this->openssl_cnf );
-        // openssl_pkey_export( $this->keypair, $this->privatekey, null, $this->openssl_cnf );
-
-        // $this->publickey    = openssl_pkey_get_details( $this->keypair );
-        // $this->pbk          = $this->publickey[ 'key' ];
-        
+        $context    = stream_context_create( $options );
+        $result     = file_get_contents( $this->url_handshake, false, $context );
+        if ( $result === false )
+            echo 'Error: Handshake with Oppimittinetworking.com Failed!';
+        else var_dump( $result );
 
         // TODO:
         // Salvare su DB:

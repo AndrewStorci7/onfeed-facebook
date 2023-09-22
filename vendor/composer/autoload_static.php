@@ -22,6 +22,7 @@ class ComposerStaticInitf0d99b21904ee15abb175e96675ed52b
         'O' => 
         array (
             'Oppimittinetworking\\OnfeedFacebook\\' => 35,
+            'Oppimittinetworking\\' => 20,
         ),
     );
 
@@ -37,6 +38,10 @@ class ComposerStaticInitf0d99b21904ee15abb175e96675ed52b
         'Oppimittinetworking\\OnfeedFacebook\\' => 
         array (
             0 => __DIR__ . '/../..' . '/admin/builder',
+        ),
+        'Oppimittinetworking\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/admin',
         ),
     );
 

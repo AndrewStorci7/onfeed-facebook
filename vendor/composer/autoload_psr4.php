@@ -9,4 +9,5 @@ return array(
     'phpseclib3\\' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
     'ParagonIE\\ConstantTime\\' => array($vendorDir . '/paragonie/constant_time_encoding/src'),
     'Oppimittinetworking\\OnfeedFacebook\\' => array($baseDir . '/admin/builder'),
+    'Oppimittinetworking\\' => array($baseDir . '/admin'),
 );

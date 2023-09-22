@@ -7,7 +7,7 @@ jQuery( 'window' ).ready( ($) => {
         const split_url = splitStr( url );
         let response    = false;
         $.post( 
-            split_url + '/wp-content/plugins/onfeed-facebook/admin/builder/callback.php', 
+            split_url + '/wp-content/plugins/onfeed-facebook/admin/callback.php', 
             { pk: pk, hs: true },
             ( _r ) => {
                 console.log(_r);

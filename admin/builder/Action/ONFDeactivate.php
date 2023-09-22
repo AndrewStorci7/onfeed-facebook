@@ -23,11 +23,12 @@ class ONFDeactivate {
      * @since 2.2.7
      */
     public static function deactivate() {
-        
+
+        // disable shortcut
     }
 
     public static function unregister_admin_scripts() {
-        add_action( 'admin_dequeue_scripts', array( 'OnFeedDeactivate', "dequeue_admin" ) );
+        add_action( 'admin_dequeue_scripts', array( 'Oppimittinetworking\OnfeedFacebook\Action\ONFDeactivate', "dequeue_admin" ) );
     }
 
     public static function unregister_wp_scripts() {
