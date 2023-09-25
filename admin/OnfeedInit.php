@@ -25,8 +25,8 @@ final class OnFeedInit {
      */
     public static function get_services() {
         return array(
-            ONFAdmin::class,
-            ONFActivate::class
+            'ONFAdmin'      => ONFAdmin::class,
+            'ONFActivate'   => ONFActivate::class
         );
     }
 
