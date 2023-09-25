@@ -2,7 +2,7 @@
     "name": "oppimittinetworking/onfeed-facebook",
     "description": "Display the Facebook's posts into your website, and customize it",
     "type": "project",
-    "license": " AGPL-3.0-or-later",
+    "license": "AGPL-3.0-or-later",
     "autoload": {
         "psr-4": {
             "Oppimittinetworking\\OnfeedFacebook\\": "admin/builder/",
