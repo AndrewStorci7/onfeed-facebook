@@ -2,7 +2,7 @@
 
 <div class="container-fluid onfeed-header-pannel" >
     <div class="container-fluid onfeed-content" >
-        <img class="onfeed-img" src="<?php echo plugins_url( "../assets/img/logoONFEED-AI-1.png", __FILE__ ) ?>" alt="Logo OnFeed" >
+        <img class="onfeed-img" src="<?php echo ONFEED_PLUGIN_URL . "assets/img/logoONFEED-AI-1.png"; ?>" alt="Logo OnFeed" >
     </div>
 </div><!-- end onfeed-header-pannel -->
 

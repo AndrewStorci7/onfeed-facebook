@@ -9,7 +9,7 @@
  * @since 2.2.7
  */
 
-namespace Oppimittinetworking\OnfeedFacebook\Action;
+namespace Oppimittinetworking\OnfeedFacebook\Admin;
 
 class ONFDeactivate {
 
@@ -22,13 +22,13 @@ class ONFDeactivate {
      * 
      * @since 2.2.7
      */
-    public static function deactivate() {
+    public static function unregister_service() {
 
         // disable shortcut
     }
 
     public static function unregister_admin_scripts() {
-        add_action( 'admin_dequeue_scripts', array( 'Oppimittinetworking\OnfeedFacebook\Action\ONFDeactivate', "dequeue_admin" ) );
+        add_action( 'admin_dequeue_scripts', array( 'Oppimittinetworking\\OnfeedFacebook\\Admin\\ONFDeactivate', "dequeue_admin" ) );
     }
 
     public static function unregister_wp_scripts() {

@@ -5,8 +5,19 @@
 */
 
 namespace Oppimittinetworking;
+use Oppimittinetworking\OnfeedFacebook\Admin\ONFAdmin;
+use Oppimittinetworking\OnfeedFacebook\Admin\ONFActivate;
+use Oppimittinetworking\OnfeedFacebook\Admin\ONFDeactivate;
 
-final class OnfeedInit {
+final class OnFeedInit {
+
+    /**
+     * Store all the classe services
+     * @var array|class
+     */
+    private $services = array(
+        \OnfeedFacebook\Admin\ONFAdmin::class
+    );
 
     /**
      * Store all the classes inside an array
@@ -14,7 +25,8 @@ final class OnfeedInit {
      */
     public static function get_services() {
         return array(
-            \OnfeedFacebook\Admin\ONFAdmin::class
+            ONFAdmin::class,
+            ONFActivate::class
         );
     }
 
@@ -26,10 +38,9 @@ final class OnfeedInit {
     public static function register_services() {
         foreach ( self::get_services() as $class ) {
             $service = self::instantiate( $class );
-            if ( method_exists( $service, 'register_admin_scripts' ) && 
-                 method_exists( $service, 'register_wp_scripts' ) ) {
-                $service->register_admin_scripts();
-                $service->register_wp_scripts();
+            if ( method_exists( $service, 'register_service' ) ) {
+                $service::register_service();
+                // $service->register_wp_scripts();
             }
         }
     }

@@ -8,8 +8,8 @@
 */
 
 namespace Oppimittinetworking\OnfeedFacebook;
-use Oppimittinetworking\OnfeedFacebook\Action\ONFActivate;
-use Oppimittinetworking\OnfeedFacebook\Action\ONFDeactivate;
+use Oppimittinetworking\OnfeedFacebook\Admin\ONFActivate;
+use Oppimittinetworking\OnfeedFacebook\Admin\ONFDeactivate;
 use Oppimittinetworking\OnfeedFacebook\RSA\ONFRSAEncrypt;
 use Oppimittinetworking\OnfeedFacebook\RSA\ONFRSADecrypt;
 
@@ -28,14 +28,14 @@ class OnFeedMain {
     */
     public function __construct() {
         ONFActivate::activate();
-        ONFActivate::register_admin_scripts();
-        ONFActivate::register_wp_scripts();
+        // ONFActivate::register_admin_scripts();
+        // ONFActivate::register_wp_scripts();
     }
 
     public function __deactivate() {
         ONFDeactivate::deactivate();
-        ONFDeactivate::unregister_admin_scripts();
-        ONFDeactivate::unregister_wp_scripts();
+        // ONFDeactivate::unregister_admin_scripts();
+        // ONFDeactivate::unregister_wp_scripts();
     }
 
     public static function encrypt_conn() {

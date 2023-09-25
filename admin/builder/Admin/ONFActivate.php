@@ -9,20 +9,19 @@
  * @since 2.2.7
  */
 
-namespace Oppimittinetworking\OnfeedFacebook\Action;
+namespace Oppimittinetworking\OnfeedFacebook\Admin;
 
 class ONFActivate {
 
     /**
      * Activate:
      * It will create plugin's tables inside the database
-     * 
-     * no @param
-     * no @return
+     * @param   none
+     * @return  none 
      * 
      * @since 2.2.7
      */
-    public static function activate() {
+    public static function register_service() {
         global $wpdb;
 
         if ( $wpdb->get_var( 'SHOW TABLES LIKE "%' . ONFEED_DB_TABLE . '%"' ) == null ) {
@@ -82,5 +81,18 @@ class ONFActivate {
             require_once ABSPATH . 'wp-admin/includes/upgrade.php';
             dbDelta( $sql );
         }
+
+        add_filter( "plugin_action_links_" . ONFEED_PLUGIN_BASENAME, array( "Oppimittinetworking\\OnfeedFacebook\\Admin\\ONFActivate", 'register_settings_link' ) );
+    }
+
+    /**
+     * Register settings link
+     * @param   array   $links
+     * @return  array   $links
+     */
+    public static function register_settings_link( $links ) {
+        $settings_link = "<a href='admin.php?page=onfeed_settings_page'>Settings</a>";
+        array_push( $links, $settings_link );
+        return $links;
     }
 }
