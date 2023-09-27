@@ -87,7 +87,7 @@ class ONFHttpRequest {
         global $wpdb;
 
         if ( $name_feed === null || $name_feed === 'undefined' || $name_feed === '' ) {
-            throw new IdFeedNotFound( 'Id of the feed not found' );
+            throw new IdFeedNotFound('Id of the feed not found');
         }
 
         $this->feed_name = $name_feed;
@@ -128,17 +128,18 @@ class ONFHttpRequest {
 
         $args = array(
             'method'            => 'POST',
-            'body'              => json_encode( array(
+            'body'              => array(
                 'type_req'  => 1,
                 'pbk'       => $this->pbk,
                 'domain'    => $this->domain_name,
                 'feed_name' => $this->feed_name,
                 'id_domain' => $this->id_domain
-            ) ),
+            ),
             'reject_unsafe_url' => false,
             'timeout'           => 10,
             'redirection'       => 10,
-            'httpversion'       => '1.0'
+            'httpversion'       => '1.0',
+            'sslverify'         => false
         );
 
         $this->data = wp_remote_post( 'https://oauthon.local/oauth/onfeed/api/', $args );

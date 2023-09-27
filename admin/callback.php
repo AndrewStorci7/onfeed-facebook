@@ -7,18 +7,25 @@
  * @since   2.2.7
 */
 
-// if ( ! defined( 'ABSPATH' ) ) exit;
+namespace Oppimittinetworking;
 
 require_once __DIR__ . '/builder/ONFHttpRequest.php';
 use Oppimittinetworking\OnfeedFacebook\ONFHttpRequest;
 
 try {
-    $id_feed        = isset( $_POST['id_feed'] ) ? $_POST['id_feed'] : null;
-    $name_feed      = isset( $_POST['feed_name'] ) ? $_POST['feed_name'] : null;
-    $http_request   = new ONFHttpRequest( $name_feed, $id_feed );
+    // $id_feed        = isset( $_POST['id_feed'] ) ? $_POST['id_feed'] : null;
+    // $name_feed      = isset( $_POST['feed_name'] ) ? $_POST['feed_name'] : null;
+    // $http_request   = new ONFHttpRequest( $name_feed, $id_feed );
+    $http_request   = new ONFHttpRequest( 'prova', 'prova' );
     $resp           = $http_request->new_feed_connection();
 
-    echo $resp;
+    print_r( $resp );
+
+    /*if ( $resp['type_resp'] === -1 ) {
+        echo "Error: " . $resp['message'];
+    } else {
+        echo json_decode( $resp );
+    }*/
 } catch ( Oppimittinetworking\OnfeedFacebook\Exceptions\IdFeedNotFound $e ) {
     echo $e->get_message();
 }
