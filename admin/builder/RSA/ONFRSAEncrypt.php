@@ -7,7 +7,8 @@
 */
 
 namespace Oppimittinetworking\OnfeedFacebook\RSA;
-use phpseclib3\Crypt\RSA;
+
+// require_once __DIR__ . '/../../../vendor/phpseclib/phpseclib/phpseclib/Crypt/RSA.php';
 
 class ONFRSAEncrypt {
     
@@ -16,10 +17,12 @@ class ONFRSAEncrypt {
      * 
      * @var array
      */
-    private $openssl_cnf = array();
-
-    private $url_handshake = 'https://oauthon.local/oauth/onfeed/handshake.php';
-    // $url = 'https://oppimittinetworking.com/oauth/onfeed/handshake.php';
+    private $openssl_cnf = array(
+        "config"            => __DIR__ . '/openssl/openssl.cnf',
+        "digest_alg"        => "sha512",
+        "private_key_bits"  => 4096,
+        "private_key_type"  => OPENSSL_KEYTYPE_RSA
+    );
 
     private $current_domain;
 
@@ -55,28 +58,34 @@ class ONFRSAEncrypt {
      */
     public function __construct() {
 
-        $this->privatekey       = RSA::createKey();
-        $this->publickey        = $this->privatekey->getPublicKey();
+        $pkey_new               = openssl_pkey_new( $this->openssl_cnf );
+
+        openssl_pkey_export( $pkey_new, $this->privatekey );
+
+        $this->pbk              = openssl_pkey_get_details( $pkey_new );
+        $this->publickey        = $this->pbk['key'];
+        // $this->privatekey       = RSA::createKey();
+        // $this->publickey        = $this->privatekey->getPublicKey();
         $this->current_domain   = $_SERVER[ 'SERVER_NAME' ];
 
-        $data = [ 
-            'pbk'       => $this->getPublicKey(), 
-            'domain'    => $this->current_domain
-        ];
+        // $data = [ 
+        //     'pbk'       => $this->getPublicKey(), 
+        //     'domain'    => $this->current_domain
+        // ];
 
-        $options = [
-            'http' => [
-                'header'    => "Content-type: application/x-www-form-urlencoded\r\n",
-                'method'    => 'POST',
-                'content'   => http_build_query( $data )
-            ],
-        ];
+        // $options = [
+        //     'http' => [
+        //         'header'    => "Content-type: application/x-www-form-urlencoded\r\n",
+        //         'method'    => 'POST',
+        //         'content'   => http_build_query( $data )
+        //     ],
+        // ];
             
-        $context    = stream_context_create( $options );
-        $result     = file_get_contents( $this->url_handshake, false, $context );
-        if ( $result === false )
-            echo 'Error: Handshake with Oppimittinetworking.com Failed!';
-        else var_dump( $result );
+        // $context    = stream_context_create( $options );
+        // $result     = file_get_contents( $this->url_handshake, false, $context );
+        // if ( $result === false )
+        //     echo 'Error: Handshake with Oppimittinetworking.com Failed!';
+        // else var_dump( $result );
 
         // TODO:
         // Salvare su DB:
@@ -84,8 +93,12 @@ class ONFRSAEncrypt {
         // - Chiave Privata
     }
 
-    public function getPublicKey() {
+    public function getPbk() {
         return $this->publickey;
+    }
+
+    public function getDomain() {
+        return $this->current_domain;
     }
 }
 ?>

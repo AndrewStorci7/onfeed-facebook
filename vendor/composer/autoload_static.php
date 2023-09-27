@@ -47,8 +47,12 @@ class ComposerStaticInitf0d99b21904ee15abb175e96675ed52b
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'Oppimittinetworking\\OnfeedFacebook\\Action\\ONFActivate' => __DIR__ . '/../..' . '/admin/builder/Action/ONFActivate.php',
-        'Oppimittinetworking\\OnfeedFacebook\\Action\\ONFDeactivate' => __DIR__ . '/../..' . '/admin/builder/Action/ONFDeactivate.php',
+        'Oppimittinetworking\\OnFeedInit' => __DIR__ . '/../..' . '/admin/OnFeedInit.php',
+        'Oppimittinetworking\\OnfeedFacebook\\Admin\\ONFActivate' => __DIR__ . '/../..' . '/admin/builder/Admin/ONFActivate.php',
+        'Oppimittinetworking\\OnfeedFacebook\\Admin\\ONFAdmin' => __DIR__ . '/../..' . '/admin/builder/Admin/ONFAdmin.php',
+        'Oppimittinetworking\\OnfeedFacebook\\Admin\\ONFDeactivate' => __DIR__ . '/../..' . '/admin/builder/Admin/ONFDeactivate.php',
+        'Oppimittinetworking\\OnfeedFacebook\\Exceptions\\IdFeedNotFound' => __DIR__ . '/../..' . '/admin/builder/Exceptions/IdFeedNotFound.php',
+        'Oppimittinetworking\\OnfeedFacebook\\ONFHttpRequest' => __DIR__ . '/../..' . '/admin/builder/ONFHttpRequest.php',
         'Oppimittinetworking\\OnfeedFacebook\\OnFeedMain' => __DIR__ . '/../..' . '/admin/builder/OnFeedMain.php',
         'Oppimittinetworking\\OnfeedFacebook\\RSA\\ONFRSADecrypt' => __DIR__ . '/../..' . '/admin/builder/RSA/ONFRSADecrypt.php',
         'Oppimittinetworking\\OnfeedFacebook\\RSA\\ONFRSAEncrypt' => __DIR__ . '/../..' . '/admin/builder/RSA/ONFRSAEncrypt.php',

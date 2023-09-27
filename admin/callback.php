@@ -2,18 +2,39 @@
 /**
  * Handshake File with Oppimittinetworking.com Page Authentication
  * 
- * @author Andrea Storci, Oppimittinetworking.com
- * @since 2.2.0 
+ * @author  Andrea Storci   Oppimittinetworking.com
+ * 
+ * @since   2.2.7
 */
 
-require_once __DIR__ . '/../onfeed.php';
+// if ( ! defined( 'ABSPATH' ) ) exit;
 
-// First step: generation of keys
-global $onfmain;
+require_once __DIR__ . '/builder/ONFHttpRequest.php';
+use Oppimittinetworking\OnfeedFacebook\ONFHttpRequest;
 
-$enc_conn = $onfmain::encrypt_conn();
+try {
+    $id_feed        = isset( $_POST['id_feed'] ) ? $_POST['id_feed'] : null;
+    $name_feed      = isset( $_POST['feed_name'] ) ? $_POST['feed_name'] : null;
+    $http_request   = new ONFHttpRequest( $name_feed, $id_feed );
+    $resp           = $http_request->new_feed_connection();
 
-echo $enc_conn->getPublicKey();
+    echo $resp;
+} catch ( Oppimittinetworking\OnfeedFacebook\Exceptions\IdFeedNotFound $e ) {
+    echo $e->get_message();
+}
+
+// if ( isset( $_POST['onfeed_btn_sub'] ) ) {
+//     echo "ciao";
+//     require_once __DIR__ . '/../onfeed.php';
+
+//     // First step: generation of keys
+//     global $onfmain;
+
+//     $enc_conn = $onfmain::encrypt_conn();
+
+//     echo $enc_conn->getPublicKey();
+// }
+// echo 'no';
 
 // Second step: get the domain/URI to associate with the public key
 

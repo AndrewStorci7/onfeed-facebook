@@ -7,8 +7,12 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
-    'Oppimittinetworking\\OnfeedFacebook\\Action\\ONFActivate' => $baseDir . '/admin/builder/Action/ONFActivate.php',
-    'Oppimittinetworking\\OnfeedFacebook\\Action\\ONFDeactivate' => $baseDir . '/admin/builder/Action/ONFDeactivate.php',
+    'Oppimittinetworking\\OnFeedInit' => $baseDir . '/admin/OnFeedInit.php',
+    'Oppimittinetworking\\OnfeedFacebook\\Admin\\ONFActivate' => $baseDir . '/admin/builder/Admin/ONFActivate.php',
+    'Oppimittinetworking\\OnfeedFacebook\\Admin\\ONFAdmin' => $baseDir . '/admin/builder/Admin/ONFAdmin.php',
+    'Oppimittinetworking\\OnfeedFacebook\\Admin\\ONFDeactivate' => $baseDir . '/admin/builder/Admin/ONFDeactivate.php',
+    'Oppimittinetworking\\OnfeedFacebook\\Exceptions\\IdFeedNotFound' => $baseDir . '/admin/builder/Exceptions/IdFeedNotFound.php',
+    'Oppimittinetworking\\OnfeedFacebook\\ONFHttpRequest' => $baseDir . '/admin/builder/ONFHttpRequest.php',
     'Oppimittinetworking\\OnfeedFacebook\\OnFeedMain' => $baseDir . '/admin/builder/OnFeedMain.php',
     'Oppimittinetworking\\OnfeedFacebook\\RSA\\ONFRSADecrypt' => $baseDir . '/admin/builder/RSA/ONFRSADecrypt.php',
     'Oppimittinetworking\\OnfeedFacebook\\RSA\\ONFRSAEncrypt' => $baseDir . '/admin/builder/RSA/ONFRSAEncrypt.php',

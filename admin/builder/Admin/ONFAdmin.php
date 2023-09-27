@@ -36,8 +36,12 @@ class ONFAdmin {
      * @since 2.2.7
      */
     public static function add_admin_pages() {
+        // Main Menu
         add_menu_page( 'OnFeed Facebook', 'OnFeed Facebook', 'manage_options', 'onfeed_admin_menu', array( 'Oppimittinetworking\\OnfeedFacebook\\Admin\\ONFAdmin', 'admin_index' ), 'dashicons-facebook-alt', 110 );
-        // add_menu_page( 'Settings', 'OnFeed Facebook', 'manage_options', 'onfeed_admin_menu', array( 'Oppimittinetworking\\OnfeedFacebook\\Admin\\ONFAdmin', 'admin_index' ), 'dashicons-facebook-alt', 110 );
+        // Feeds
+        add_submenu_page( 'onfeed_admin_menu', 'Feeds', 'Feeds', 'manage_options', 'onfeed_feeds_menu', array( 'Oppimittinetworking\\OnfeedFacebook\\Admin\\ONFAdmin', 'admin_feeds' ) );
+        // Settings
+        add_submenu_page( 'onfeed_admin_menu', 'Settings', 'Settings', 'manage_options', 'onfeed_settings_menu', array( 'Oppimittinetworking\\OnfeedFacebook\\Admin\\ONFAdmin', 'admin_settings' ) );
     }
 
     /**

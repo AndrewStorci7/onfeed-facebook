@@ -1,4 +1,6 @@
-<?php if ( ! defined('ABSPATH') ) exit; ?>
+<?php 
+if ( ! defined('ABSPATH') ) exit; // Exit if accessed directly
+?>
 
 <div class="container-fluid onfeed-header-pannel" >
     <div class="container-fluid onfeed-content" >
@@ -14,16 +16,30 @@
         <hr class="onfeed-hr">
         <p>
             Connect a new Facebook account.<br>
-            <button id="onfeed-btn-sendtoapi" type="button" class="btn btn-info">
-                Connect
-            </button>
-            <!--<form action="../../src/RSA/ONFRSAEncrypt.php" method="post">
-                <button id="onfeed-btn-sendtoapi" type="button" class="btn btn-info">
+            <div class="row">
+                <div class="col-3">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">@</span>
+                        </div>
+                        <input name="onfeed_input_feedname" id="onfeed_input_feedname" type="text" class="form-control" placeholder="Feed 1" aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="col-1">        
+                    <button id="onfeed-btn-sendtoapi" type="button" class="btn btn-info">
+                        Create
+                    </button>
+                </div>
+                <div class="col-8"></div>
+            </div>
+            <!--<form action="" method="post">
+                <button name="onfeed_btn_sub" type="submit" class="btn btn-info">
                     Connect
                 </button>
             </form>-->
             <p id="prova-hs">
-                <?php //if ( $data_from_fb !== null || $data_from_fb !== "" ) { 
+                <?php 
+                //if ( $data_from_fb !== null || $data_from_fb !== "" ) { 
                     //echo $data_from_fb;
                 //} ?>
             </p>

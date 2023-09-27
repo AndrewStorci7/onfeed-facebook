@@ -5,11 +5,23 @@
 */
 
 namespace Oppimittinetworking;
+
+if ( file_exists( dirname( __FILE__ ) . '/../vendor/autoload.php' ) ) {
+    require_once __DIR__ . '/../vendor/autoload.php';
+}
+use Oppimittinetworking\OnfeedFacebook\OnFeedMain;
 use Oppimittinetworking\OnfeedFacebook\Admin\ONFAdmin;
 use Oppimittinetworking\OnfeedFacebook\Admin\ONFActivate;
 use Oppimittinetworking\OnfeedFacebook\Admin\ONFDeactivate;
 
 final class OnFeedInit {
+
+    /**
+     * OnFeedMain
+     * 
+     * @var OnFeedMain
+     */
+    public $onfmain;
 
     /**
      * Store all the classe services
@@ -30,12 +42,17 @@ final class OnFeedInit {
         );
     }
 
+    public function __construct() {
+        $this->onfmain = new OnFeedMain();
+    }
+
     /**
      * Loop through the classes, initialize them,
      * and call the register() method if i exist
      * @return
      */
     public static function register_services() {
+
         foreach ( self::get_services() as $class ) {
             $service = self::instantiate( $class );
             if ( method_exists( $service, 'register_service' ) ) {
@@ -55,9 +72,3 @@ final class OnFeedInit {
         return $service;
     }
 }
-
-// // activation hook
-// register_activation_hook( __FILE__, array( $onfmain, '__construct' ) );
-
-// // deactivation hook
-// register_deactivation_hook( __FILE__, array( $onfmain, '__deactivate' ) );

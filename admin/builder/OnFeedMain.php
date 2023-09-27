@@ -8,12 +8,24 @@
 */
 
 namespace Oppimittinetworking\OnfeedFacebook;
-use Oppimittinetworking\OnfeedFacebook\Admin\ONFActivate;
-use Oppimittinetworking\OnfeedFacebook\Admin\ONFDeactivate;
-use Oppimittinetworking\OnfeedFacebook\RSA\ONFRSAEncrypt;
-use Oppimittinetworking\OnfeedFacebook\RSA\ONFRSADecrypt;
+use Oppimittinetworking\OnfeedFacebook\ONFHttpRequest;
+use Oppimittinetworking\OnfeedFacebook\Admin\ONFAdmin;
 
 class OnFeedMain {
+
+    /**
+     * ONFHttpRequest
+     * 
+     * @var ONFHttpRequest
+     */
+    public $onf_http_request;
+
+    /**
+     * ONFHttpRequest
+     * 
+     * @var ONFAdmin
+     */
+    public $onf_admin;
 
     /**
      * Constructor:
@@ -27,22 +39,23 @@ class OnFeedMain {
      * @since 2.2.7
     */
     public function __construct() {
-        ONFActivate::activate();
-        // ONFActivate::register_admin_scripts();
-        // ONFActivate::register_wp_scripts();
+        // $this->onf_http_request = new ONFHttpRequest();
+        // $this->onf_admin        = new ONFAdmin();
     }
 
-    public function __deactivate() {
-        ONFDeactivate::deactivate();
-        // ONFDeactivate::unregister_admin_scripts();
-        // ONFDeactivate::unregister_wp_scripts();
-    }
+    public function connect( $type = 1, $name_feed = null ) {
 
-    public static function encrypt_conn() {
-        return new ONFRSAEncrypt();
-    }
-
-    public function decrypt_data() {
-        return new ONFRSADecrypt();
+        switch ( $type ) {
+            case 1: {
+                // New Connection
+                $this->onf_http_request->new_feed_connection();
+                break;
+            }
+            case 2: {
+                // Fetch data
+                $this->onf_http_request->make_post_request( $name_feed );
+                break;
+            }
+        }
     }
 }
