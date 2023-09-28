@@ -10,14 +10,34 @@
 namespace Oppimittinetworking;
 
 require_once __DIR__ . '/builder/ONFHttpRequest.php';
+require_once __DIR__ . '/builder/Exceptions/IdFeedNotFound.php';
 use Oppimittinetworking\OnfeedFacebook\ONFHttpRequest;
+use Oppimittinetworking\OnfeedFacebook\Exceptions\IdFeedNotFound;
 
 try {
-    // $id_feed        = isset( $_POST['id_feed'] ) ? $_POST['id_feed'] : null;
-    // $name_feed      = isset( $_POST['feed_name'] ) ? $_POST['feed_name'] : null;
-    // $http_request   = new ONFHttpRequest( $name_feed, $id_feed );
-    $http_request   = new ONFHttpRequest( 'prova', 'prova' );
+    $id_feed        = isset( $_POST['id_feed'] ) ? $_POST['id_feed'] : null;
+    $name_feed      = isset( $_POST['feed_name'] ) ? $_POST['feed_name'] : null;
+    $http_request   = new ONFHttpRequest( $name_feed, $id_feed );
+    // $http_request   = new ONFHttpRequest( 'prova', 'prova' );
     $resp           = $http_request->new_feed_connection();
+
+    if ( $resp['body']['type_resp'] === -1 ) {
+
+        switch ( $resp['body']['message'] ) {
+            case "already_exc": {
+                // TODO
+                break;
+            }
+            case "no_data": {
+                // TODO
+                break;
+            }
+            case "ins_succ": {
+                // TODO
+                break;
+            }
+        }
+    }
 
     print_r( $resp );
 
@@ -26,7 +46,7 @@ try {
     } else {
         echo json_decode( $resp );
     }*/
-} catch ( Oppimittinetworking\OnfeedFacebook\Exceptions\IdFeedNotFound $e ) {
+} catch ( IdFeedNotFound $e ) {
     echo $e->get_message();
 }
 

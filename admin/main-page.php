@@ -24,6 +24,7 @@ if ( ! defined('ABSPATH') ) exit; // Exit if accessed directly
                         </div>
                         <input name="onfeed_input_feedname" id="onfeed_input_feedname" type="text" class="form-control" placeholder="Feed 1" aria-label="Username" aria-describedby="basic-addon1">
                     </div>
+                    <p id="onfeed-feedname-notvalid-error-message"></p>
                 </div>
                 <div class="col-1">        
                     <button id="onfeed-btn-sendtoapi" type="button" class="btn btn-info">
@@ -71,3 +72,21 @@ if ( ! defined('ABSPATH') ) exit; // Exit if accessed directly
     </div>
 </div>
 -->
+
+<!-- LOADING DIV -->
+<div class="container-fluid onfeed-loading-conn-parent">
+    <div class="container onfeed-loading-conn">    
+        <div class="loadingio-spinner-radio-buqhezk3sag">
+            <div class="ldio-8zvggs87mmq">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+        <p>
+            <span style="font-size: 18px; font-weight: bold; padding: 0 20px 20px 20px">
+                Connecting to <span style="font-weight: 100; font-family: 'Inconsolata', monospace;">oppimittinetworking.com</span>
+            </span>
+        </p>
+    </div>
+</div>

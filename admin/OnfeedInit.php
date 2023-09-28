@@ -1,8 +1,11 @@
 <?php
 /**
+ * OnFeedInit Class
  * 
+ * @author Andrea Storci
  * 
-*/
+ * @since 2.2.7
+ */
 
 namespace Oppimittinetworking;
 
