@@ -84,9 +84,11 @@ if ( ! defined('ABSPATH') ) exit; // Exit if accessed directly
             </div>
         </div>
         <p>
-            <span style="font-size: 18px; font-weight: bold; padding: 0 20px 20px 20px">
+            <span id="onfeed-connected-valid" style="font-size: 18px; font-weight: bold; padding: 0 20px 20px 20px">
                 Connecting to <span style="font-weight: 100; font-family: 'Inconsolata', monospace;">oppimittinetworking.com</span>
-            </span>
+            </span> </br>
+            <span style="font-size: 18px; font-weight: bold; padding: 0 20px 20px 20px" id="onfeed-redirect-valid"></span>
+            <button style="display: none; margin-top: 5px; margin-bottom: 10px; float: right;" id="onfeed-connection-failed-btn" class="btn btn-danger" >Close</button>
         </p>
     </div>
 </div>

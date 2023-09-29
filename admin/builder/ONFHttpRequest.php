@@ -142,11 +142,7 @@ class ONFHttpRequest {
             'sslverify'         => false
         );
 
-        $this->data = wp_remote_post( 'https://oauthon.local/oauth/onfeed/api/', $args );
-        
-        // if ( $response === true || $response === 1 ) {
-        //     wp_redirect( 'https://oauthon.local/oauth/onfeed/' );
-        // }
+        $this->data = wp_remote_post( 'https://oauthon.local/oauth/onfeed/api/', $args )['body'];
         
         return $this->data;
     }

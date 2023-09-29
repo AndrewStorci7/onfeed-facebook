@@ -15,37 +15,55 @@ use Oppimittinetworking\OnfeedFacebook\ONFHttpRequest;
 use Oppimittinetworking\OnfeedFacebook\Exceptions\IdFeedNotFound;
 
 try {
-    $id_feed        = isset( $_POST['id_feed'] ) ? $_POST['id_feed'] : null;
+    $id_domain      = isset( $_POST['id_domain'] ) ? $_POST['id_domain'] : null;
     $name_feed      = isset( $_POST['feed_name'] ) ? $_POST['feed_name'] : null;
-    $http_request   = new ONFHttpRequest( $name_feed, $id_feed );
+    $http_request   = new ONFHttpRequest( $name_feed, $id_domain );
     // $http_request   = new ONFHttpRequest( 'prova', 'prova' );
-    $resp           = $http_request->new_feed_connection();
+    // $resp           = $http_request->new_feed_connection();
+    // print_r( $resp );
+    $resp           = get_object_vars( json_decode( $http_request->new_feed_connection() ) );
 
-    if ( $resp['body']['type_resp'] === -1 ) {
+    if ( $resp['type_resp'] === -1 ) {
+        
+        $message = (string) $resp['message'];
 
-        switch ( $resp['body']['message'] ) {
+        switch ( $message ) {
             case "already_exc": {
                 // TODO
+                echo json_encode( array(
+                    'code'  => 300,
+                    'msg'   => "already_exc"
+                ) );
                 break;
             }
             case "no_data": {
                 // TODO
+                echo json_encode ( array(
+                    'code'  => 404,
+                    'msg'   => "no_data"
+                ) );
                 break;
             }
-            case "ins_succ": {
-                // TODO
+            default: {
+                echo json_encode( array(
+                    'code'  => 500,
+                    'msg'   => "internal_err"
+                ) );
                 break;
             }
         }
+    } else if ( $resp['type_resp'] === 1 ) {
+        echo json_encode( array(
+            'code'  => 200,
+            'msg'   => ""
+        ) );
+    } else {
+        echo json_encode( array(
+            'code'  => 500,
+            'msg'   => "internal_err"
+        ) );
     }
 
-    print_r( $resp );
-
-    /*if ( $resp['type_resp'] === -1 ) {
-        echo "Error: " . $resp['message'];
-    } else {
-        echo json_decode( $resp );
-    }*/
 } catch ( IdFeedNotFound $e ) {
     echo $e->get_message();
 }

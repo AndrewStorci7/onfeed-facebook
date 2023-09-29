@@ -108,7 +108,7 @@
 .ldio-8zvggs87mmq div {
     position: absolute;
     animation: ldio-8zvggs87mmq 1s linear infinite;
-    box-sizing: border-box!important;
+    box-sizing: border-box !important;
     }
 .ldio-8zvggs87mmq div:nth-child(1) {
     width: 44px;
@@ -175,7 +175,7 @@
 }
 .onfeed-loading-conn {
     position: fixed;
-    width: 400px;
+    width: 420px;
     top: 35%;
     left: 40%;
     background-color: white;
