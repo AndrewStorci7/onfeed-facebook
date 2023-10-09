@@ -9,7 +9,9 @@
  * @since 2.2.7
  */
 
-namespace Oppimittinetworking\OnfeedFacebook\Admin;
+namespace Oppimittinetworking\OnfeedFacebook;
+
+// if ( ! defined( 'ABSPATH' ) ) die;
 
 class ONFActivate {
 
@@ -22,6 +24,7 @@ class ONFActivate {
      * @since 2.2.7
      */
     public static function register_service() {
+
         global $wpdb;
 
         if ( $wpdb->get_var( 'SHOW TABLES LIKE "%' . ONFEED_DB_TABLE . '%"' ) == null ) {
@@ -94,5 +97,27 @@ class ONFActivate {
         $settings_link = "<a href='admin.php?page=onfeed_settings_page'>Settings</a>";
         array_push( $links, $settings_link );
         return $links;
+    }
+
+    public static function register_feed( array|string $data_to_insert ) {
+
+        global $wpdb;
+
+        if ( ! empty( $data_to_insert ) ) {
+
+            foreach ( $data_to_insert as $k => $v ) {
+                if ( $v === null || $v === '' || $v === 'undefined' || empty( $v ) )
+                    return false;
+            }
+
+            $check = $wpdb->insert( 
+                ONFEED_DB_TABLE . "feeds",
+                $data_to_insert
+            );
+
+            return $check; 
+        }
+
+        return false;
     }
 }

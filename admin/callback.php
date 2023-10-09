@@ -9,61 +9,86 @@
 
 namespace Oppimittinetworking;
 
-require_once __DIR__ . '/builder/ONFHttpRequest.php';
 require_once __DIR__ . '/builder/Exceptions/IdFeedNotFound.php';
-use Oppimittinetworking\OnfeedFacebook\ONFHttpRequest;
+require_once __DIR__ . '/builder/RSA/ONFRSADecrypt.php';
+require_once __DIR__ . '/builder/ONFHttpRequest.php';
+
 use Oppimittinetworking\OnfeedFacebook\Exceptions\IdFeedNotFound;
+use Oppimittinetworking\OnfeedFacebook\RSA\ONFRSADecrypt;
+use Oppimittinetworking\OnfeedFacebook\ONFHttpRequest;
 
 try {
+
+    // Data for new connection to send at API handler
     $id_domain      = isset( $_POST['id_domain'] ) ? $_POST['id_domain'] : null;
     $name_feed      = isset( $_POST['feed_name'] ) ? $_POST['feed_name'] : null;
-    $http_request   = new ONFHttpRequest( $name_feed, $id_domain );
-    // $http_request   = new ONFHttpRequest( 'prova', 'prova' );
-    // $resp           = $http_request->new_feed_connection();
-    // print_r( $resp );
-    $resp           = get_object_vars( json_decode( $http_request->new_feed_connection() ) );
 
-    if ( $resp['type_resp'] === -1 ) {
-        
-        $message = (string) $resp['message'];
+    // Data Encrypted from the API
+    $data_enc       = isset( $_POST['onfeed_data'] ) ? $_POST['onfeed_data'] : null;
+     
+    if ( $id_domain !== null && $id_domain !== '' && $id_domain !== 'undefined' && 
+         $name_feed !== null && $name_feed !== '' && $name_feed !== 'undefined' ) {
 
-        switch ( $message ) {
-            case "already_exc": {
-                // TODO
-                echo json_encode( array(
-                    'code'  => 300,
-                    'msg'   => "already_exc"
-                ) );
-                break;
-            }
-            case "no_data": {
-                // TODO
-                echo json_encode ( array(
-                    'code'  => 404,
-                    'msg'   => "no_data"
-                ) );
-                break;
-            }
-            default: {
-                echo json_encode( array(
-                    'code'  => 500,
-                    'msg'   => "internal_err"
-                ) );
-                break;
-            }
+        try {
+            $http_request   = new ONFHttpRequest( $name_feed, $id_domain );
+            $resp           = get_object_vars( json_decode( $http_request->new_feed_connection() ) );
+        } catch ( \Exception $e ) {
+            json_encode( array(
+                'code'  => 500,
+                'msg'   => $e->getMessage()
+            ) );
         }
-    } else if ( $resp['type_resp'] === 1 ) {
-        echo json_encode( array(
-            'code'  => 200,
-            'msg'   => ""
-        ) );
-    } else {
-        echo json_encode( array(
-            'code'  => 500,
-            'msg'   => "internal_err"
-        ) );
-    }
+        // $http_request   = new ONFHttpRequest( 'prova', 'prova' );
+        // $resp           = $http_request->new_feed_connection();
+        // print_r( $resp );
+        // $resp           = get_object_vars( json_decode( $http_request->new_feed_connection() ) );
 
+        if ( $resp['type_resp'] === -1 ) {
+            
+            $message = (string) $resp['message'];
+
+            switch ( $message ) {
+                case "already_exc": {
+                    // TODO
+                    echo json_encode( array(
+                        'code'  => 300,
+                        'msg'   => "already_exc"
+                    ) );
+                    break;
+                }
+                case "no_data": {
+                    // TODO
+                    echo json_encode ( array(
+                        'code'  => 404,
+                        'msg'   => "no_data"
+                    ) );
+                    break;
+                }
+                default: {
+                    echo json_encode( array(
+                        'code'  => 500,
+                        'msg'   => "internal_err"
+                    ) );
+                    break;
+                }
+            }
+        } else if ( $resp['type_resp'] === 1 ) {
+            echo json_encode( array(
+                'code'  => 200,
+                'msg'   => ""
+            ) );
+        } else {
+            echo json_encode( array(
+                'code'  => 500,
+                'msg'   => "internal_err"
+            ) );
+        }
+    } else if ( $data_enc !== null && $data_enc !== '' && $data_enc !== 'undefined' ) {
+
+        echo $data_enc;
+    } else {
+        echo 'No data';
+    }
 } catch ( IdFeedNotFound $e ) {
     echo $e->get_message();
 }

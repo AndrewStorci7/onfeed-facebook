@@ -16,6 +16,7 @@ jQuery( 'window' ).ready( ($) => {
                 { id_domain: id_domain, feed_name: name_feed },
                 ( _r ) => {
 
+                    console.log( _r );
                     var parse = JSON.parse( _r );
                     if ( parse.code == 200 ) {
 
@@ -32,7 +33,7 @@ jQuery( 'window' ).ready( ($) => {
                             $( ".ldio-8zvggs87mmq div:nth-child(3)" ).css( "border-color", "#08210D" );
                             $( "#onfeed-connected-valid" ).html( "Connected <i class=\"fa-solid fa-circle-check\" style=\"color: #2aa73f;\"></i>" );
                             $( "#onfeed-redirect-valid" ).html( "Redirect to <span style=\"font-weight: 100; font-family: 'Inconsolata', monospace;\">oppimittinetworking.com</span>" );
-                            window.location.href = "https://oauthon.local/oauth/onfeed/inc/url.php?url_ref=" + url;
+                            window.location.href = "https://oauthon.local/oauth/onfeed/inc/url.php?url_ref=" + url + "&id_feed=" + id_domain;
                         } );
                         $( ".ldio-8zvggs87mmq div" ).css( "animation", "none" );
                         

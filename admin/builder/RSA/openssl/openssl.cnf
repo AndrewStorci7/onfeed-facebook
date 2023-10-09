@@ -9,7 +9,8 @@
 
 # This definition stops the following lines choking if HOME isn't
 # defined.
-HOME			= .
+HOME			= ./ssl/private
+dir				= ./ssl/private
 
 # Extra OBJECT IDENTIFIER info:
 #oid_file		= $ENV::HOME/.oid
@@ -42,7 +43,6 @@ default_ca	= CA_default		# The default ca section
 ####################################################################
 [ CA_default ]
 
-dir		= ./demoCA		# Where everything is kept
 certs		= $dir/certs		# Where the issued certs are kept
 crl_dir		= $dir/crl		# Where the issued crl are kept
 database	= $dir/index.txt	# database index file.

@@ -58,11 +58,9 @@ class ONFRSAEncrypt {
      */
     public function __construct() {
 
-        $pkey_new               = openssl_pkey_new( $this->openssl_cnf );
-
-        openssl_pkey_export( $pkey_new, $this->privatekey );
-
-        $this->pbk              = openssl_pkey_get_details( $pkey_new );
+        $this->keypair          = openssl_pkey_new( $this->openssl_cnf );
+        openssl_pkey_export( $this->keypair, $this->privatekey, null, $this->openssl_cnf );
+        $this->pbk              = openssl_pkey_get_details( $this->keypair );
         $this->publickey        = $this->pbk['key'];
         // $this->privatekey       = RSA::createKey();
         // $this->publickey        = $this->privatekey->getPublicKey();
@@ -100,5 +98,10 @@ class ONFRSAEncrypt {
     public function getDomain() {
         return $this->current_domain;
     }
+
+    public function getPrivKey() {
+        return $this->privatekey;
+    }
+
 }
 ?>

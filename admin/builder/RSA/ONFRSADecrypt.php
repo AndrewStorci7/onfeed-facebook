@@ -9,8 +9,6 @@
 
 namespace Oppimittinetworking\OnfeedFacebook\RSA;
 
-// if ( ! defined( 'ABSPATH' ) ) exit;
-
 class ONFRSADecrypt {
     // TODO
 }
