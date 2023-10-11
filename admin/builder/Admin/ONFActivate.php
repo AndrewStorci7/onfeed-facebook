@@ -37,6 +37,7 @@ class ONFActivate {
             $table_name_photo       = ONFEED_DB_TABLE . 'photo';
             $table_name_video       = ONFEED_DB_TABLE . 'video';
             $table_name_feeds       = ONFEED_DB_TABLE . 'feeds';
+            $table_name_cache       = ONFEED_DB_TABLE . 'cache';
 
             $sql = "
             CREATE TABLE $table_name_posts (
@@ -60,20 +61,28 @@ class ONFActivate {
                 wav_path varchar(255)
             ) $charset_collate;
             CREATE TABLE $table_name_feeds (
-                id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+                id varchar(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
                 name_feed varchar(255) NOT NULL DEFAULT 'Custom Feed',
                 data_crt datetime NOT NULL COMMENT 'Date-Time Initialization',
                 last_upd datetime NOT NULL COMMENT 'Last update of the feed from Facebook',
-                time_to_upd integer,
-                pe_to_show integer COMMENT 'Number of Posts/Events to show',
-                feed_style integer(50),
+                time_to_upd integer NULL DEFAULT '86400',
+                pe_to_show integer NULL DEFAULT '5' COMMENT 'Number of Posts/Events to show',
+                feed_style integer(50) NULL DEFAULT '1',
                 id_onfeed_posts varchar(255) NOT NULL DEFAULT '-1',
                 id_onfeed_events varchar(255) NOT NULL DEFAULT '-1',
                 id_onfeed_album_photo varchar(255) NOT NULL DEFAULT '-1',
-                pub_key text NOT NULL,
-                priv_key text NOT NULL,
-                token_fb varchar(255) NOT NULL
+                pub_key text NULL,
+                priv_key text NULL,
+                token_fb varchar(255) NULL
             ) $charset_collate;
+            CREATE TABLE $table_name_cache (
+                id integer PRIMARY KEY NOT NULL AUTO_INCREMENT,
+                id_feed varchar(256) NOT NULL,
+                data_enc text NULL,
+                date_crt datetime NULL,
+                date_exp datetime NULL
+            ) $charset_collate;
+            ALTER TABLE $table_name_cache ADD FOREIGN KEY (id_feed) REFERENCES $table_name_feeds (id);
             ALTER TABLE $table_name_feeds ADD FOREIGN KEY (id_onfeed_posts) REFERENCES $table_name_posts (id);
             ALTER TABLE $table_name_feeds ADD FOREIGN KEY (id_onfeed_events) REFERENCES $table_name_events (id);
             ALTER TABLE $table_name_feeds ADD FOREIGN KEY (id_onfeed_album_photo) REFERENCES $table_name_album_photo (id);

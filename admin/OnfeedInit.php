@@ -13,10 +13,13 @@ if ( file_exists( dirname( __FILE__ ) . '/../vendor/autoload.php' ) ) {
     require_once __DIR__ . '/../vendor/autoload.php';
 }
 
-use Oppimittinetworking\OnfeedFacebook\OnFeedMain;
+use Oppimittinetworking\OnfeedFacebook\Exceptions\IdFeedNotFound;
+use Oppimittinetworking\OnfeedFacebook\Admin\ONFDeactivate;
+use Oppimittinetworking\OnfeedFacebook\RSA\ONFRSADecrypt;
+use Oppimittinetworking\OnfeedFacebook\ONFHttpRequest;
 use Oppimittinetworking\OnfeedFacebook\Admin\ONFAdmin;
 use Oppimittinetworking\OnfeedFacebook\ONFActivate;
-use Oppimittinetworking\OnfeedFacebook\Admin\ONFDeactivate;
+use Oppimittinetworking\OnfeedFacebook\OnFeedMain;
 
 final class OnFeedInit {
 
@@ -25,7 +28,9 @@ final class OnFeedInit {
      * 
      * @var OnFeedMain
      */
-    public $onfmain;
+    public OnFeedMain $onfMain;
+
+    public ONFHttpRequest $onfHttpRequest;
 
     /**
      * Store all the classe services
@@ -46,9 +51,20 @@ final class OnFeedInit {
         );
     }
 
+    /**
+     * 
+     */
     public function __construct( string $db_v = null, string $plugin_path = null, string $plugin_url = null, string $main_file = null, string $basename = null, string $builder_path = null, string $slug = null, string $db_name = null ) {
 
-        $this->onfmain = new OnFeedMain( $db_v, $plugin_path, $plugin_url, $main_file, $basename, $builder_path, $slug, $db_name );
+        $this->onfMain          = new OnFeedMain( $db_v, $plugin_path, $plugin_url, $main_file, $basename, $builder_path, $slug, $db_name );
+        // $this->onfHttpRequest   = new ONFHttpRequest();
+    }
+
+    /**
+     * 
+     */
+    public static function createRequest( string $name_feed, string $id_domain ) {
+        $this->onfHttpRequest = new ONFHttpRequest( $name_feed, $id_domain, $this->onfMain );
     }
 
     /**

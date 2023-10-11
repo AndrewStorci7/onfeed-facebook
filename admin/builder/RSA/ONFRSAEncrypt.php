@@ -62,33 +62,7 @@ class ONFRSAEncrypt {
         openssl_pkey_export( $this->keypair, $this->privatekey, null, $this->openssl_cnf );
         $this->pbk              = openssl_pkey_get_details( $this->keypair );
         $this->publickey        = $this->pbk['key'];
-        // $this->privatekey       = RSA::createKey();
-        // $this->publickey        = $this->privatekey->getPublicKey();
         $this->current_domain   = $_SERVER[ 'SERVER_NAME' ];
-
-        // $data = [ 
-        //     'pbk'       => $this->getPublicKey(), 
-        //     'domain'    => $this->current_domain
-        // ];
-
-        // $options = [
-        //     'http' => [
-        //         'header'    => "Content-type: application/x-www-form-urlencoded\r\n",
-        //         'method'    => 'POST',
-        //         'content'   => http_build_query( $data )
-        //     ],
-        // ];
-            
-        // $context    = stream_context_create( $options );
-        // $result     = file_get_contents( $this->url_handshake, false, $context );
-        // if ( $result === false )
-        //     echo 'Error: Handshake with Oppimittinetworking.com Failed!';
-        // else var_dump( $result );
-
-        // TODO:
-        // Salvare su DB:
-        // - Chiave Pubblica
-        // - Chiave Privata
     }
 
     public function getPbk() {

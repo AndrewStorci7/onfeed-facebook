@@ -9,11 +9,12 @@
 
 namespace Oppimittinetworking\OnfeedFacebook;
 
-require_once __DIR__ . '/Exceptions/IdFeedNotFound.php';
-require_once __DIR__ . '/RSA/ONFRSAEncrypt.php';
-require_once __DIR__ . '/ONFActivate.php';
+// require_once __DIR__ . '/Exceptions/IdFeedNotFound.php';
+// require_once __DIR__ . '/RSA/ONFRSAEncrypt.php';
+// require_once __DIR__ . '/ONFActivate.php';
 
 use Oppimittinetworking\OnfeedFacebook\Exceptions\IdFeedNotFound;
+use Oppimittinetworking\OnfeedFacebook\RSA\ONFRSADecrypt;
 use Oppimittinetworking\OnfeedFacebook\RSA\ONFRSAEncrypt;
 use Oppimittinetworking\OnfeedFacebook\ONFActivate;
 
@@ -65,17 +66,19 @@ class ONFHttpRequest {
     private $data = '';
 
     /**
+     * Create and Save Public Key and Private key
      * 
+     * @param   string
+     * @param   string
      */
     public function __construct( string $feed_name = '', string $id_domain = '' ) {
 
-        // global $wpdb, $onfmaster;
-
-        // $onfmain = $onfmaster->onfmain;
+        global $wpdb;
 
         if ( $feed_name === null || $feed_name === 'undefined' || $feed_name === '' ||
              $id_domain === null || $id_domain === 'undefined' || $id_domain === '' ) {
-            throw new IdFeedNotFound('Name feed not valid');
+            
+            return;
         }    
 
         $this->feed_name    = $feed_name;
@@ -94,7 +97,11 @@ class ONFHttpRequest {
             "priv_key"  => $this->private_key
         ];
 
-        $check = ONFActivate::register_feed( $data_to_insert );
+        $check = $wpdb->insert( 
+            $wpdb->prefix . 'onfeedfb_feeds',
+            $data_to_insert
+        );
+
         if ( ! $check ) {
             throw new \Exception( "Error on register feed" );
         } 
@@ -184,5 +191,24 @@ class ONFHttpRequest {
         // $this->data = wp_remote_post( 'https://oauthon.local/oauth/onfeed/api/', $args );
 
         return $this->data;
+    }
+
+    public static function decrypt_data( string $data_to_decrypt, string $id_feed ) {
+
+        global $wpdb;
+
+        if ( empty( $data_to_decrypt ) || $data_to_decrypt === '' || $data_to_decrypt === null || $data_to_decrypt === 'undefined' || 
+             empty( $id_feed ) || $id_feed === '' || $id_feed === null || $id_feed === 'undefined' ) {
+
+            return "no data";
+        }
+
+        $priv_key = $wpdb->get_results( 
+            "SELECT $wpdb->prefix" . "onfeedfb_feeds.priv_key FROM $wpdb->prefix" . "onfeedfb_feeds WHERE $wpdb->prefix" . "onfeedfb_feeds.id='$id_feed'",
+            ARRAY_A
+        )[0]['priv_key'];
+
+        $data_dec = ONFRSADecrypt::decrypt( $data_to_decrypt, $priv_key );
+        return $data_dec;
     }
 }

@@ -7,11 +7,10 @@
  * @since   2.2.7
 */
 
-namespace Oppimittinetworking;
-
 require_once __DIR__ . '/builder/Exceptions/IdFeedNotFound.php';
 require_once __DIR__ . '/builder/RSA/ONFRSADecrypt.php';
 require_once __DIR__ . '/builder/ONFHttpRequest.php';
+require_once __DIR__ . '/../../../../wp-load.php';
 
 use Oppimittinetworking\OnfeedFacebook\Exceptions\IdFeedNotFound;
 use Oppimittinetworking\OnfeedFacebook\RSA\ONFRSADecrypt;
@@ -25,6 +24,7 @@ try {
 
     // Data Encrypted from the API
     $data_enc       = isset( $_POST['onfeed_data'] ) ? $_POST['onfeed_data'] : null;
+    $onfeed_id_feed = isset( $_POST['onfeed_id_feed'] ) ? $_POST['onfeed_id_feed'] : null;
      
     if ( $id_domain !== null && $id_domain !== '' && $id_domain !== 'undefined' && 
          $name_feed !== null && $name_feed !== '' && $name_feed !== 'undefined' ) {
@@ -49,7 +49,6 @@ try {
 
             switch ( $message ) {
                 case "already_exc": {
-                    // TODO
                     echo json_encode( array(
                         'code'  => 300,
                         'msg'   => "already_exc"
@@ -57,7 +56,6 @@ try {
                     break;
                 }
                 case "no_data": {
-                    // TODO
                     echo json_encode ( array(
                         'code'  => 404,
                         'msg'   => "no_data"
@@ -83,9 +81,11 @@ try {
                 'msg'   => "internal_err"
             ) );
         }
-    } else if ( $data_enc !== null && $data_enc !== '' && $data_enc !== 'undefined' ) {
-
-        echo $data_enc;
+    } else if ( $data_enc !== null && $data_enc !== '' && $data_enc !== 'undefined' && 
+                $onfeed_id_feed !== null && $onfeed_id_feed !== '' && $onfeed_id_feed !== 'undefined' ) {
+        
+        $response = ONFHttpRequest::decrypt_data( $data_enc, $onfeed_id_feed );
+        echo $response;
     } else {
         echo 'No data';
     }

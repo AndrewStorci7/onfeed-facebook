@@ -10,7 +10,7 @@
  * Text Domain: on-onfeed
 */
 
-// if ( ! defined( 'ABSPATH' ) ) die; // Die if accessed directly
+if ( ! defined( 'ABSPATH' ) ) die; // Die if accessed directly
 
 global $wpdb;
 
@@ -55,6 +55,7 @@ register_activation_hook( "Oppimittinetworking\\OnfeedFacebook\\Admin\\ONFActiva
 register_deactivation_hook( "Oppimittinetworking\\OnfeedFacebook\\Admin\\ONFDeactivate", 'unregister_service' );
 
 require_once ONFEED_PLUGIN_PATH . '/admin/OnFeedInit.php';
+
 use Oppimittinetworking\OnFeedInit;
 global $onfmaster;
 
