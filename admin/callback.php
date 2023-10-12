@@ -14,6 +14,7 @@ require_once __DIR__ . '/../../../../wp-load.php';
 
 use Oppimittinetworking\OnfeedFacebook\Exceptions\IdFeedNotFound;
 use Oppimittinetworking\OnfeedFacebook\RSA\ONFRSADecrypt;
+use Oppimittinetworking\OnfeedFacebook\Admin\ONFCache;
 use Oppimittinetworking\OnfeedFacebook\ONFHttpRequest;
 
 try {
@@ -84,7 +85,9 @@ try {
     } else if ( $data_enc !== null && $data_enc !== '' && $data_enc !== 'undefined' && 
                 $onfeed_id_feed !== null && $onfeed_id_feed !== '' && $onfeed_id_feed !== 'undefined' ) {
         
+        $cache = new ONFCache( $onfeed_id_feed, $data_enc );
         $response = ONFHttpRequest::decrypt_data( $data_enc, $onfeed_id_feed );
+
         echo $response;
     } else {
         echo 'No data';

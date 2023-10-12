@@ -9,7 +9,7 @@
  * @since 2.2.7
  */
 
-namespace Oppimittinetworking\OnfeedFacebook;
+namespace Oppimittinetworking\OnfeedFacebook\Admin;
 
 // if ( ! defined( 'ABSPATH' ) ) die;
 
@@ -61,7 +61,7 @@ class ONFActivate {
                 wav_path varchar(255)
             ) $charset_collate;
             CREATE TABLE $table_name_feeds (
-                id varchar(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+                id varchar(20) PRIMARY KEY NOT NULL,
                 name_feed varchar(255) NOT NULL DEFAULT 'Custom Feed',
                 data_crt datetime NOT NULL COMMENT 'Date-Time Initialization',
                 last_upd datetime NOT NULL COMMENT 'Last update of the feed from Facebook',
@@ -76,7 +76,7 @@ class ONFActivate {
                 token_fb varchar(255) NULL
             ) $charset_collate;
             CREATE TABLE $table_name_cache (
-                id integer PRIMARY KEY NOT NULL AUTO_INCREMENT,
+                id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
                 id_feed varchar(256) NOT NULL,
                 data_enc text NULL,
                 date_crt datetime NULL,

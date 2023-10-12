@@ -16,9 +16,9 @@ if ( file_exists( dirname( __FILE__ ) . '/../vendor/autoload.php' ) ) {
 use Oppimittinetworking\OnfeedFacebook\Exceptions\IdFeedNotFound;
 use Oppimittinetworking\OnfeedFacebook\Admin\ONFDeactivate;
 use Oppimittinetworking\OnfeedFacebook\RSA\ONFRSADecrypt;
+use Oppimittinetworking\OnfeedFacebook\Admin\ONFActivate;
 use Oppimittinetworking\OnfeedFacebook\ONFHttpRequest;
 use Oppimittinetworking\OnfeedFacebook\Admin\ONFAdmin;
-use Oppimittinetworking\OnfeedFacebook\ONFActivate;
 use Oppimittinetworking\OnfeedFacebook\OnFeedMain;
 
 final class OnFeedInit {
