@@ -15,5 +15,5 @@
     - `...feeds -> token_fb` NULL DEFAULT 'NULL'
 
 ## Per il Database
-- [ ] Creare una tabella `cache` che servirà per salvare i dati momentaneamente (es: i dati appena decryptati).
+- [x] Creare una tabella `cache` che servirà per salvare i dati momentaneamente (es: i dati appena decryptati).
 - [ ] Dopo aver creato la tabella, creare l'apposita classe che gestisce la cache.

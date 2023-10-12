@@ -86,9 +86,11 @@ try {
                 $onfeed_id_feed !== null && $onfeed_id_feed !== '' && $onfeed_id_feed !== 'undefined' ) {
         
         $cache = new ONFCache( $onfeed_id_feed, $data_enc );
-        $response = ONFHttpRequest::decrypt_data( $data_enc, $onfeed_id_feed );
+        $prova = $cache->create_cache();
+        // $response = ONFHttpRequest::decrypt_data( $data_enc, $onfeed_id_feed );
 
-        echo $response;
+        // echo $response;
+        echo $prova;
     } else {
         echo 'No data';
     }
