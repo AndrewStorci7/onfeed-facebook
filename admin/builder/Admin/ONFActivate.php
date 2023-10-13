@@ -78,6 +78,8 @@ class ONFActivate {
             CREATE TABLE $table_name_cache (
                 id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
                 id_feed varchar(256) NOT NULL,
+                type_data varchar(20) NOT NULL DEFAULT 'normal',
+                type_format varchar(20) NOT NULL DEFAULT 'page',
                 data_enc text NULL,
                 date_crt datetime NULL,
                 date_exp datetime NULL

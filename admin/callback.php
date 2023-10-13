@@ -9,6 +9,7 @@
 
 require_once __DIR__ . '/builder/Exceptions/IdFeedNotFound.php';
 require_once __DIR__ . '/builder/RSA/ONFRSADecrypt.php';
+require_once __DIR__ . '/builder/Admin/ONFCache.php';
 require_once __DIR__ . '/builder/ONFHttpRequest.php';
 require_once __DIR__ . '/../../../../wp-load.php';
 
@@ -20,13 +21,15 @@ use Oppimittinetworking\OnfeedFacebook\ONFHttpRequest;
 try {
 
     // Data for new connection to send at API handler
-    $id_domain      = isset( $_POST['id_domain'] ) ? $_POST['id_domain'] : null;
-    $name_feed      = isset( $_POST['feed_name'] ) ? $_POST['feed_name'] : null;
+    $id_domain          = isset( $_POST['id_domain'] ) ? $_POST['id_domain'] : null;
+    $name_feed          = isset( $_POST['feed_name'] ) ? $_POST['feed_name'] : null;
 
     // Data Encrypted from the API
-    $data_enc       = isset( $_POST['onfeed_data'] ) ? $_POST['onfeed_data'] : null;
-    $onfeed_id_feed = isset( $_POST['onfeed_id_feed'] ) ? $_POST['onfeed_id_feed'] : null;
-     
+    $data_enc           = isset( $_POST['onfeed_data'] ) ? $_POST['onfeed_data'] : null;
+    $onfeed_id_feed     = isset( $_POST['onfeed_id_feed'] ) ? $_POST['onfeed_id_feed'] : null;
+    $onfeed_type_data   = isset( $_POST['onfeed_type_data'] ) ? $_POST['onfeed_type_data'] : null;
+    $onfeed_type_format = isset( $_POST['onfeed_type_format'] ) ? $_POST['onfeed_type_format'] : null;
+
     if ( $id_domain !== null && $id_domain !== '' && $id_domain !== 'undefined' && 
          $name_feed !== null && $name_feed !== '' && $name_feed !== 'undefined' ) {
 
@@ -83,55 +86,19 @@ try {
             ) );
         }
     } else if ( $data_enc !== null && $data_enc !== '' && $data_enc !== 'undefined' && 
-                $onfeed_id_feed !== null && $onfeed_id_feed !== '' && $onfeed_id_feed !== 'undefined' ) {
+                $onfeed_id_feed !== null && $onfeed_id_feed !== '' && $onfeed_id_feed !== 'undefined' &&
+                $onfeed_type_data !== null && $onfeed_type_data !== '' && $onfeed_type_data !== 'undefined' &&
+                $onfeed_type_format !== null && $onfeed_type_format !== '' && $onfeed_type_format !== 'undefined' ) {
         
-        $cache = new ONFCache( $onfeed_id_feed, $data_enc );
+        $cache = new ONFCache( $onfeed_id_feed, $data_enc, $onfeed_type_data, $onfeed_type_format );
         $prova = $cache->create_cache();
+        echo $prova;
         // $response = ONFHttpRequest::decrypt_data( $data_enc, $onfeed_id_feed );
 
         // echo $response;
-        echo $prova;
     } else {
         echo 'No data';
     }
 } catch ( IdFeedNotFound $e ) {
     echo $e->get_message();
 }
-
-// if ( isset( $_POST['onfeed_btn_sub'] ) ) {
-//     echo "ciao";
-//     require_once __DIR__ . '/../onfeed.php';
-
-//     // First step: generation of keys
-//     global $onfmain;
-
-//     $enc_conn = $onfmain::encrypt_conn();
-
-//     echo $enc_conn->getPublicKey();
-// }
-// echo 'no';
-
-// Second step: get the domain/URI to associate with the public key
-
-// Third step: send the public key to the OAuth API and save it
-
-
-/*
-$h = get_headers( "https://oppimittinetworking.com/oauth/onfeed/index.php", true );
-
-
-data_from_fb = isset( $_POST['content'] ) ? $_POST['content'] : '';
-
-if ( $data_from_fb !== null || $data_from_fb !== '' ) {
-    setcookie( 'data_fb', $data_from_fb, time() + 86400 * 30, '/', false, true );
-    echo 1;
-} else {
-    echo 0;
-}
-
-if ( $h !== null || $h !== '' ) {
-    print_r( $h );
-} else {
-    echo 0;
-}
-*/

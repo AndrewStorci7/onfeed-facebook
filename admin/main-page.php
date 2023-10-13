@@ -1,5 +1,7 @@
 <?php 
 if ( ! defined('ABSPATH') ) exit; // Exit if accessed directly
+
+echo get_headers( $_SERVER['REQUEST_URI'], false );
 ?>
 
 <div class="container-fluid onfeed-header-pannel" >
