@@ -31,7 +31,8 @@ class ONFRSADecrypt {
         $check = openssl_private_decrypt(
             base64_decode( $data_to_decrypt ),
             $res,
-            $priv_key
+            $priv_key,
+            OPENSSL_PKCS1_PADDING
         );
 
         if ( $check ) {

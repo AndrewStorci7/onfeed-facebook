@@ -1,6 +1,3 @@
-============================================================================================================================================
-============================================================================================================================================
-
 # TODO:
 
 - [x] Controllare generazione chiave privata e chiave pubblica.
@@ -16,4 +13,4 @@
 
 ## Per il Database
 - [x] Creare una tabella `cache` che servirà per salvare i dati momentaneamente (es: i dati appena decryptati).
-- [ ] Dopo aver creato la tabella, creare l'apposita classe che gestisce la cache.
+- [x] Dopo aver creato la tabella, creare l'apposita classe che gestisce la cache.

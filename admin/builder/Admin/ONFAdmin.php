@@ -23,6 +23,7 @@ class ONFAdmin {
      * @since 2.2.7
      */
     public static function register_service() {
+        
         add_action( 'admin_enqueue_scripts', array( "Oppimittinetworking\\OnfeedFacebook\\Admin\\ONFAdmin", "enqueue_admin" ) );
 
         add_action( 'admin_menu', array( "Oppimittinetworking\\OnfeedFacebook\\Admin\\ONFAdmin", 'add_admin_pages' ) );
@@ -110,6 +111,7 @@ class ONFAdmin {
         wp_register_style( "font_awesome", "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" );
         wp_enqueue_style( "font_awesome" );
 
+        wp_enqueue_style( "onfeed_fonts_css", ONFEED_PLUGIN_URL . "assets/css/font.css" );
         wp_enqueue_style( "onfeed_main_css", ONFEED_PLUGIN_URL . "assets/css/main.css" );
         wp_enqueue_style( "onfeed_shortcut_css", ONFEED_PLUGIN_URL . "assets/css/shortcut.css" );
         wp_enqueue_style( "onfeed_feedspage_css", ONFEED_PLUGIN_URL . "assets/css/feedspage.css" );

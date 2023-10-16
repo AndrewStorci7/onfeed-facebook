@@ -56,7 +56,7 @@ class ONFHttpRequest {
      * 
      * @var string
      */
-    private $id_domain = '';
+    public $id_domain = '';
 
     /**
      * Response data
@@ -91,8 +91,8 @@ class ONFHttpRequest {
         $data_to_insert     = [
             "id"        => $this->id_domain,
             "name_feed" => $this->feed_name,
-            "data_crt"  => date( 'Y-m-d h:i:sa' ),
-            "last_upd"  => date( 'Y-m-d h:i:sa' ),
+            "data_crt"  => date( 'Y-m-d H:i:sa' ),
+            "last_upd"  => date( 'Y-m-d H:i:sa' ),
             "pub_key"   => $this->pbk,
             "priv_key"  => $this->private_key
         ];

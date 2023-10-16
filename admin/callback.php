@@ -91,8 +91,8 @@ try {
                 $onfeed_type_format !== null && $onfeed_type_format !== '' && $onfeed_type_format !== 'undefined' ) {
         
         $cache = new ONFCache( $onfeed_id_feed, $data_enc, $onfeed_type_data, $onfeed_type_format );
-        $prova = $cache->create_cache();
-        echo $prova;
+        $_cache = $cache->create_cache();
+        echo $_cache;
         // $response = ONFHttpRequest::decrypt_data( $data_enc, $onfeed_id_feed );
 
         // echo $response;

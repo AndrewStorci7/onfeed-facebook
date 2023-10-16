@@ -18,9 +18,9 @@ class ONFRSAEncrypt {
      * @var array
      */
     private $openssl_cnf = array(
-        "config"            => __DIR__ . '/openssl/openssl.cnf',
-        "digest_alg"        => "sha512",
-        "private_key_bits"  => 4096,
+        // "config"            => __DIR__ . '/openssl/openssl.cnf',
+        "digest_alg"        => "sha256",
+        "private_key_bits"  => 2048,
         "private_key_type"  => OPENSSL_KEYTYPE_RSA
     );
 
@@ -59,7 +59,8 @@ class ONFRSAEncrypt {
     public function __construct() {
 
         $this->keypair          = openssl_pkey_new( $this->openssl_cnf );
-        openssl_pkey_export( $this->keypair, $this->privatekey, null, $this->openssl_cnf );
+        // openssl_pkey_export( $this->keypair, $this->privatekey, null, $this->openssl_cnf );
+        openssl_pkey_export( $this->keypair, $this->privatekey );
         $this->pbk              = openssl_pkey_get_details( $this->keypair );
         $this->publickey        = $this->pbk['key'];
         $this->current_domain   = $_SERVER[ 'SERVER_NAME' ];

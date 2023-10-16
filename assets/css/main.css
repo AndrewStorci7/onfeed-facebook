@@ -1,6 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&family=Montserrat:wght@200;500&display=swap');
-
 .onfeed-hr {
     width: 80% !important;
     margin-left: 5% !important;
@@ -10,10 +7,10 @@
 }
 .onfeed-header-pannel,
 .onfeed-main-pannel {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Poppins', Helvetica, Arial, sans-serif;
 }
 .onfeed-header-pannel {
-    border-radius: 20px 20px 0 0;
+    border-radius: 20px;
     padding: 0px !important;
     height: auto;
     background-color: #333333;
@@ -21,30 +18,37 @@
     margin-top: 30px;
     position : relative;
 }
+/*
 .onfeed-main-pannel {
     margin-top: -14px;
-    border-radius: 20px 20px 10px 10px;
+    border-radius: 20px;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
     min-height: 400px;
     background-color: #EBEBEB;
-    /* margin-right: 20px !important; */
+    margin-right: 20px !important;
     position : relative;
-}
+}*/
 .onfeed-content{
     padding: 0px !important;
+    height: 150px;
+    background-image: url( "../img/logoONFEED-AI-1.png" );
+    background-position: center center;
+    background-size: cover;
+    border-radius: 20px;
+    margin-bottom: 10px;
     /* position: absolute;
     top: 50%;
     left: 50%; */
 }
 .onfeed-img {
     width: 100%;
-    border-radius: 20px 20px 0 0;
+    border-radius: 20px;
 }
 .onfeed-new-feed h2,
 .onfeed-exis-feed h2 {
     font-weight: 500;
     padding-left: 95px;
-    padding-top: 25px;
+    padding-top: 10px;
 }
 .onfeed-new-feed p,
 .onfeed-exis-feed p {
@@ -57,6 +61,19 @@
 .onfeed-new-feed .col-3 p {
     padding-left: 0;
 }
+#wpfooter {
+    display: none;
+}
+#onfeed-all-right-reserved {
+    position: fixed;
+    bottom: 3px;
+    left: 180px;
+}
+#onfeed-plugin-version {
+    position: fixed;
+    bottom: 3px;
+    right: 20px;
+}
 .onfeed-copyright-on {
     padding-top: 5px;
     font-size: 10px;
@@ -68,11 +85,11 @@
     color: #999999;
 }
 .onfeed-copyright-on a:hover {
-    background-color: #C9EDDC;
-    color: #ABABAB;
+    /* background-color: #83c1da; */
+    color: #373e41;
 }
 .onfeed-copyright-on a:visited {
-    color: #C9EDDC;
+    color: #39a7af;
 }
 .onfeed-new-feed .fa-solid {
     transform: rotate(0deg);

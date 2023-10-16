@@ -7,7 +7,7 @@ jQuery( 'window' ).ready( ($) => {
         if ( name_feed !== 'undefined' && name_feed !== null && name_feed !== '' ) {
             $( ".onfeed-loading-conn-parent" ).css( 'display', 'block' );
                 
-            let id_domain   = makeId( 20 );
+            var id_domain   = makeId( 20 );
             const url       = window.location.href;
             const split_url = splitStr( url );
 
@@ -21,19 +21,16 @@ jQuery( 'window' ).ready( ($) => {
                     if ( parse.code == 200 ) {
 
                         $( ".ldio-8zvggs87mmq div:nth-child(1)" ).delay(100).queue( () => {
-                            console.log( "primo" );
                             $( ".ldio-8zvggs87mmq div:nth-child(1)" ).css( "background", "#2AA73F" );
                         } );
                         $( ".ldio-8zvggs87mmq div:nth-child(2)" ).delay(300).queue( () => { 
-                            console.log( "secondo" );
                             $( ".ldio-8zvggs87mmq div:nth-child(2)" ).css( "border-color", "#186225" );
                         } );
                         $( ".ldio-8zvggs87mmq div:nth-child(3)" ).delay(600).queue( () => { 
-                            console.log( "terzo" );
                             $( ".ldio-8zvggs87mmq div:nth-child(3)" ).css( "border-color", "#08210D" );
                             $( "#onfeed-connected-valid" ).html( "Connected <i class=\"fa-solid fa-circle-check\" style=\"color: #2aa73f;\"></i>" );
                             $( "#onfeed-redirect-valid" ).html( "Redirect to <span style=\"font-weight: 100; font-family: 'Inconsolata', monospace;\">oppimittinetworking.com</span>" );
-                            window.location.href = "https://oauthon.local/oauth/onfeed/inc/url.php?url_ref=" + url + "&id_feed=" + id_domain;
+                            window.location.href = `https://oauthon.local/oauth/onfeed/inc/url.php?url_ref=${encodeURIComponent( url )}&id_feed=${id_domain}`;
                         } );
                         $( ".ldio-8zvggs87mmq div" ).css( "animation", "none" );
                         

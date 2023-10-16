@@ -1,0 +1,30 @@
+.onfeed-new-connection-div {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: whitesmoke;
+    z-index: 9999999999;
+}
+.onfeed-fix-position-title-new-connection {
+    top: 100px !important;
+}
+.onfeed-new-connection-div .header-new-connection {
+    padding: 0;
+    background-image: url( '../img/logoONFEED-AI-1.png' );
+    background-position: center center;
+    background-size: cover;
+}
+.position-absolute .fix-position-button {
+    margin-top: 10px !important;
+    margin-right: 10px !important;
+}
+.header-new-connection .maschera-effetto {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    opacity: .3;
+    background-color: white;
+}
